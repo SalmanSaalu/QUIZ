@@ -201,6 +201,7 @@ function Takequiz() {
                             aa[number - 1] = 'n'
                             setCheck(aa)
                             }}>clear response</button>
+
                     </div>
 
                 </div> : ""}
@@ -225,9 +226,9 @@ function Takequiz() {
                 </div>
             
             </div>:""}  */}
-             <button onClick={()=>{
-                 console.log(setAllanswer)
-                                        }}>press</button>
+                 <button onClick={(allAnswer)=>{
+                 console.log(allAnswer)
+                  }}>press</button>
         </div>
                                        
     )
@@ -377,7 +378,7 @@ const store=(number, setNumber, allanswer, setAllanswer, a, setA, check, setChec
             setA('')
         }
         else {
-            bb[number - 1] = answer
+            bb[number - 1] = ''
             setAllanswer(bb)
             aa[number - 1] = 'n'
             setCheck(aa)
