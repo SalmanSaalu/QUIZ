@@ -1,13 +1,16 @@
 
-import React,{useState} from 'react'
-
+import React,{useState,useContext} from 'react'
+import { UserContext } from '../../App'
 function Takequiz(){
-    const [answer,setAnswer]=useState('')
-    const [check,setCheck]=useState([])
-    const [a,setA]=useState('')
+    // const [answer,setAnswer]=useState('')
+    // const [check,setCheck]=useState([])
+    // const [a,setA]=useState('')
 
-    const [allanswer,setAllanswer]=useState([])
-    var [number,setNumber]=useState(1)
+    // const [allanswer,setAllanswer]=useState([])
+    // var [number,setNumber]=useState(1)
+
+    const {number,setNumber,allanswer,setAllanswer,a,setA,check,setCheck,answer,setAnswer} = useContext(UserContext);
+
     return(
         <div>
             <h2 style={{textAlign:'center'}}>QUESTIONS</h2><br/>
@@ -38,7 +41,7 @@ function Takequiz(){
                     setA("d")}}/>
                 <label >aswin</label><br/>
 
-                <button  onClick={()=>setNumber(number=number-1)} >Back</button>
+                <button  onClick={()=>setNumber(number=>number-1)} >Back</button>
                 <button  onClick={()=>{
                     
                     if(a === 'a'){
@@ -50,7 +53,9 @@ function Takequiz(){
                         setAnswer('')
                         aa[number-1]='a'
                         setCheck(aa)
+                        console.log(number)
                         setNumber(number=number+1)
+                        console.log(number)
                         console.log('if index is undefined')
                         setA('')}
                     else{
@@ -68,7 +73,9 @@ function Takequiz(){
                                console.log('gppd2')
                                setA(check[number])
                            }
+                           console.log(number)
                         setNumber(number=number+1)
+                        console.log(number)
                     }
                     }
                     else if(a === 'b'){
@@ -81,7 +88,7 @@ function Takequiz(){
                            setAnswer('')
                            aa[number-1]='b'
                            setCheck(aa)
-                           setNumber(number=number+1)
+                           setNumber(number+1)
                            console.log('if index is undefined')
                            setA('')}
                        else{
@@ -99,7 +106,7 @@ function Takequiz(){
                                console.log('gppd2')
                                setA(check[number])
                            }
-                           setNumber(number=number+1)
+                           setNumber(number+1)
                        }
                     }
                     // else if(a === 'c'){
@@ -125,7 +132,7 @@ function Takequiz(){
                      let aa=[...check]
                         aa[number-1]='n'
                         setCheck(aa)
-                        setNumber(number=number+1)
+                        setNumber(number=>number+1)
                         setA('')} }>next</button>
                 </div>
             
@@ -160,7 +167,9 @@ function Takequiz(){
                 <button  onClick={()=>{
                     console.log(allanswer)
                     console.log(check)
-                    setNumber(number=number-1)
+                    console.log(number)
+                    setNumber(number-1)
+                    console.log(number)
                     setAnswer(allanswer[number-1])
                     if(check[number-1]==='a'){
 
@@ -192,7 +201,7 @@ function Takequiz(){
                     setAnswer('')
                     aa[number-1]='a'
                     setCheck(aa)
-                    setNumber(number=number+1)
+                    setNumber(number+1)
                     console.log('if index is undefined')
                     setA('')}
                 else{
@@ -210,7 +219,7 @@ function Takequiz(){
                             console.log('gppd2')
                             setA(check[number])
                         }
-                        setNumber(number=number+1)
+                        setNumber(number+1)
 
                     }
                 }
@@ -223,7 +232,7 @@ function Takequiz(){
                         setAnswer('')
                         aa[number-1]='b'
                         setCheck(aa)
-                        setNumber(number=number+1)
+                        setNumber(number+1)
                         console.log('if index is undefined')
                         setA('')}
                     else{
@@ -242,7 +251,7 @@ function Takequiz(){
                             console.log('gppd2')
                             setA(check[number])
                         }
-                        setNumber(number=number+1)
+                        setNumber(number+1)
                     }
                 }
                 else if(a === 'c'){
@@ -250,7 +259,7 @@ function Takequiz(){
                     let aa=[...check]
                     aa[number-1]='c'
                     setCheck(aa)
-                    setNumber(number=number+1)
+                    setNumber(number=>number+1)
                     setA('')
                 }
                 else if(a === 'd'){
@@ -258,7 +267,7 @@ function Takequiz(){
                     let aa=[...check]
                     aa[number-1]='d'
                     setCheck(aa)
-                    setNumber(number=number+1)
+                    setNumber(number=>number+1)
                     setA('')
                 }
                  console.log(allanswer)
@@ -268,7 +277,7 @@ function Takequiz(){
                      let aa=[...check]
                         aa[number-1]='n'
                         setCheck(aa)
-                        setNumber(number=number+1)
+                        setNumber(number=>number+1)
                         setA('')} }>next</button>
                 </div>
             
@@ -303,11 +312,11 @@ function Takequiz(){
                 <button  onClick={()=>{
                     console.log(allanswer)
                     console.log(check)
-
-                    setNumber(number=number-1)
+                    
+                    setNumber(number=>number-1)
                     setAnswer(allanswer[number-1])
                     if(check[number-1]==='a'){
-
+                        console.log('iam here')
                         setA('a')
                         
                     } 
@@ -332,7 +341,7 @@ function Takequiz(){
                     let aa=[...check]
                     aa[number-1]='a'
                     setCheck(aa)
-                    setNumber(number=number+1)
+                    setNumber(number=>number+1)
                     setA('')
                 }
                 else if(a === 'b'){
@@ -340,7 +349,7 @@ function Takequiz(){
                     let aa=[...check]
                     aa[number-1]='b'
                     setCheck(aa)
-                    setNumber(number=number+1)
+                    setNumber(number=>number+1)
                     setA('')
                 }
                 else if(a === 'c'){
@@ -348,7 +357,7 @@ function Takequiz(){
                     let aa=[...check]
                     aa[number-1]='c'
                     setCheck(aa)
-                    setNumber(number=number+1)
+                    setNumber(number=>number+1)
                     setA('')
                 }
                 else if(a === 'd'){
@@ -356,7 +365,7 @@ function Takequiz(){
                     let aa=[...check]
                     aa[number-1]='d'
                     setCheck(aa)
-                    setNumber(number=number+1)
+                    setNumber(number=>number+1)
                     setA('')
                 }
                  console.log(allanswer)
@@ -366,7 +375,7 @@ function Takequiz(){
                      let aa=[...check]
                         aa[number-1]='n'
                         setCheck(aa)
-                        setNumber(number=number+1)
+                        setNumber(number=>number+1)
                         setA('')} }>next</button>
                 </div>
             
@@ -400,7 +409,7 @@ function Takequiz(){
                 <button  onClick={()=>{
                     console.log(allanswer)
                     console.log(check)
-                    setNumber(number=number-1)
+                    setNumber(number=>number-1)
                     if(check[number-1]==='a'){
 
                         setA('a')
@@ -427,7 +436,7 @@ function Takequiz(){
                     let aa=[...check]
                     aa[number-1]='a'
                     setCheck(aa)
-                    setNumber(number=number+1)
+                    setNumber(number=>number+1)
                     setA('')
                 }
                 else if(a === 'b'){
@@ -435,7 +444,7 @@ function Takequiz(){
                     let aa=[...check]
                     aa[number-1]='b'
                     setCheck(aa)
-                    setNumber(number=number+1)
+                    setNumber(number=>number+1)
                     setA('')
                 }
                 else if(a === 'c'){
@@ -443,7 +452,7 @@ function Takequiz(){
                     let aa=[...check]
                     aa[number-1]='c'
                     setCheck(aa)
-                    setNumber(number=number+1)
+                    setNumber(number=>number+1)
                     setA('')
                 }
                 else if(a === 'd'){
@@ -451,7 +460,7 @@ function Takequiz(){
                     let aa=[...check]
                     aa[number-1]='d'
                     setCheck(aa)
-                    setNumber(number=number+1)
+                    setNumber(number=>number+1)
                     setA('')
                 }
                  console.log(allanswer)
@@ -463,12 +472,12 @@ function Takequiz(){
                      if (Index===undefined)
                         {aa[number-1]='n'
                         setCheck(aa)
-                        setNumber(number=number+1)
+                        setNumber(number=>number+1)
                         console.log('if index is undefined')
                         setA('')}
                     else{
                         console.log('defined')
-                        setNumber(number=number+1)
+                        setNumber(number=>number+1)
                     }} }>next</button>
                 </div>
             
