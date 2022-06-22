@@ -1,5 +1,6 @@
 
 import React, { useState, useContext } from 'react'
+import { UNSAFE_NavigationContext } from 'react-router-dom';
 import { UserContext } from '../../App'
 function Takequiz() {
     // const [answer,setAnswer]=useState('')
@@ -46,14 +47,19 @@ function Takequiz() {
                         <label >aswin</label><br />
 
                         <button  >Back</button>
-                        <button onClick={()=>store(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer)}>submit</button>
-                        <button onClick={() => {
+                        <button onClick={()=>{if(a!=='n')  store(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer) } }>submit</button>
+                        <button onClick={() => next(check,number,allanswer,answer,setAnswer,setCheck,setNumber,setA,setAllanswer)}>next</button>
+                        <button onClick={()=>{
+                            setA('n')
+                            setAnswer('')
                             let aa = [...check]
+                            let bb = [...allanswer]
+                            bb[number - 1] = ''
+                            setAllanswer(bb)
                             aa[number - 1] = 'n'
                             setCheck(aa)
-                            setNumber(number = number + 1)
-                            setA('')
-                        }}>next</button>
+                            }}>clear response</button>
+
                     </div>
 
                 </div> : ""}
@@ -89,14 +95,18 @@ function Takequiz() {
                         }} />
                         <label >aswin</label><br />
                         <button onClick={() =>back(setNumber,number,setAnswer,allanswer,setA,check) }>Back</button>
-                        <button onClick={()=>store(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer)} >submit</button>
-                        <button onClick={() => {
+                        <button onClick={()=>{if(a!=='n') store(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer)} }>submit</button>
+                        <button onClick={() => next(check,number,allanswer,answer,setAnswer,setCheck,setNumber,setA,setAllanswer)}>next</button>
+                        <button onClick={()=>{
+                            setA('n')
+                            setAnswer('')
                             let aa = [...check]
+                            let bb = [...allanswer]
+                            bb[number - 1] = ''
+                            setAllanswer(bb)
                             aa[number - 1] = 'n'
                             setCheck(aa)
-                            setNumber(number = number + 1)
-                            setA('')
-                        }}>next</button>
+                            }}>clear response</button>
                     </div>
 
                 </div> : ""}
@@ -132,14 +142,18 @@ function Takequiz() {
                         }} />
                         <label >aswin</label><br />
                         <button onClick={() => back(setNumber,number,setAnswer,allanswer,setA,check) }>Back</button>
-                        <button onClick={() => store(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer)} >submit</button>
-                        <button onClick={() => {
+                        <button onClick={() =>{if(a!=='n')  store(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer)}} >submit</button>
+                        <button onClick={() => next(check,number,allanswer,answer,setAnswer,setCheck,setNumber,setA,setAllanswer)}>next</button>
+                        <button onClick={()=>{
+                            setA('n')
+                            setAnswer('')
                             let aa = [...check]
+                            let bb = [...allanswer]
+                            bb[number - 1] = ''
+                            setAllanswer(bb)
                             aa[number - 1] = 'n'
                             setCheck(aa)
-                            setNumber(number = number + 1)
-                            setA('')
-                        }}>next</button>
+                            }}>clear response</button>
                     </div>
 
                 </div> : ""}
@@ -174,23 +188,19 @@ function Takequiz() {
                         }} />
                         <label >aswin</label><br />
                         <button onClick={() =>back(setNumber,number,setAnswer,allanswer,setA,check) }>Back</button>
-                        <button onClick={() => store(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer)} >submit</button>
+                            <button onClick={() => {if(a!=='n') store(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer)} }>submit</button>
 
-                        <button onClick={() => {
+                        <button onClick={() => next(check,number,allanswer,answer,setAnswer,setCheck,setNumber,setA,setAllanswer)}>next</button>
+                        <button onClick={()=>{
+                            setA('n')
+                            setAnswer('')
                             let aa = [...check]
-                            const Index = aa?.[number - 1]
-                            if (Index === undefined) {
-                                aa[number - 1] = 'n'
-                                setCheck(aa)
-                                setNumber(number => number + 1)
-                                console.log('if index is undefined')
-                                setA('')
-                            }
-                            else {
-                                console.log('defined')
-                                setNumber(number => number + 1)
-                            }
-                        }}>next</button>
+                            let bb = [...allanswer]
+                            bb[number - 1] = ''
+                            setAllanswer(bb)
+                            aa[number - 1] = 'n'
+                            setCheck(aa)
+                            }}>clear response</button>
                     </div>
 
                 </div> : ""}
@@ -215,8 +225,11 @@ function Takequiz() {
                 </div>
             
             </div>:""}  */}
-
+             <button onClick={()=>{
+                 console.log(setAllanswer)
+                                        }}>press</button>
         </div>
+                                       
     )
 }
 
@@ -350,6 +363,37 @@ const store=(number, setNumber, allanswer, setAllanswer, a, setA, check, setChec
             setNumber(number=number + 1)
         }
     }
+    else{
+        let aa = [...check]
+        const Index = aa?.[number - 1]
+        let bb = [...allanswer]
+        if (Index === undefined) {
+            setAllanswer([...allanswer, answer])
+            setAnswer('')
+            aa[number - 1] = 'n'
+            setCheck(aa)
+            setNumber(number=number + 1)
+            console.log('if index is undefined')
+            setA('')
+        }
+        else {
+            bb[number - 1] = answer
+            setAllanswer(bb)
+            aa[number - 1] = 'n'
+            setCheck(aa)
+            console.log('defined')
+            const Index2 = aa?.[number]
+            if (Index2 === undefined) {
+                console.log("goodddd")
+                setA('')
+            }
+            else {
+                console.log('gppd2')
+                setA(check[number])
+            }
+            setNumber(number=number + 1)
+        }
+    }
 }
 
 const back=(setNumber,number,setAnswer,allanswer,setA,check)=>{
@@ -376,8 +420,51 @@ const back=(setNumber,number,setAnswer,allanswer,setA,check)=>{
 
         setA('d')
     }
+    else{
+        setA('')
+    }
 
 
+}
+
+
+const next=(check,number,allanswer,answer,setAnswer,setCheck,setNumber,setA,setAllanswer)=>{
+    let aa = [...check]
+    const Index = aa?.[number - 1]
+    let bb = [...allanswer]
+    if (Index === undefined) {
+        setAllanswer([...allanswer, answer])
+        setAnswer('')
+        aa[number - 1] = 'n'
+        setCheck(aa)
+        setNumber(number=number + 1)
+        console.log('if index is undefined')
+        setA('')
+    }
+    else {
+        setAnswer(allanswer[number])
+        setA(setCheck[number])
+        // if(answer===''){        bb[number - 1] =''
+        // setAllanswer(bb)
+        // aa[number - 1] = 'n'
+        // setCheck(aa)}
+
+        // bb[number - 1] = ''
+        // setAllanswer(bb)
+        // aa[number - 1] = 'n'
+        // setCheck(aa)
+        console.log('defined')
+        const Index2 = aa?.[number]
+        if (Index2 === undefined) {
+            console.log("goodddd")
+            setA('')
+        }
+        else {
+            console.log('gppd2')
+            setA(check[number])
+        }
+        setNumber(number=number + 1)
+    }
 }
 
 export { Takequiz }
