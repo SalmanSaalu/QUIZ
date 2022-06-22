@@ -1,487 +1,199 @@
 
-import React,{useState,useContext} from 'react'
+import React, { useState, useContext } from 'react'
 import { UserContext } from '../../App'
-function Takequiz(){
+function Takequiz() {
     // const [answer,setAnswer]=useState('')
     // const [check,setCheck]=useState([])
     // const [a,setA]=useState('')
 
     // const [allanswer,setAllanswer]=useState([])
     // var [number,setNumber]=useState(1)
+    var { number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer } = useContext(UserContext);
+    // console.log(number)
 
-    const {number,setNumber,allanswer,setAllanswer,a,setA,check,setCheck,answer,setAnswer} = useContext(UserContext);
-
-    return(
+    return (
         <div>
-            <h2 style={{textAlign:'center'}}>QUESTIONS</h2><br/>
-            {number ===1 ? 
-            <div>
-            
-            <h4 style={{paddingLeft:'30px'}}>1.What is your name</h4>
-            
-                <div style={{paddingLeft:'30px'}}>
-                <input type="radio"  name="name"   checked={a==='a'} value="salman" onChange={(e)=>{
-                        setAnswer(e.target.value)
-                        setA("a")}}/>
-                <label >Salman</label><br/>
+            <h2 style={{ textAlign: 'center' }}>QUESTIONS</h2><br />
+            {number === 1 ?
+                <div>
 
-                <input type="radio" name="name"  checked={a==='b'}  value="anas" onChange={(e)=>{
-                    setAnswer(e.target.value)
-                    setA("b") }}/>
-                <label >anas</label><br/>
+                    <h4 style={{ paddingLeft: '30px' }}>1.What is your name</h4>
 
-                
-                <input type="radio"  name="name"   checked={a==='c'} value="navaras" onChange={(e)=>{
-                        setAnswer(e.target.value)
-                        setA("c")}}/>
-                <label >navaras</label><br/>
+                    <div style={{ paddingLeft: '30px' }}>
+                        <input type="radio" name="name" checked={a === 'a'} value="salman" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("a")
+                        }} />
+                        <label >Salman</label><br />
 
-                <input type="radio" name="name"  checked={a==='d'}  value="aswin" onChange={(e)=>{
-                    setAnswer(e.target.value)
-                    setA("d")}}/>
-                <label >aswin</label><br/>
+                        <input type="radio" name="name" checked={a === 'b'} value="anas" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("b")
+                        }} />
+                        <label >anas</label><br />
 
-                <button  onClick={()=>setNumber(number=>number-1)} >Back</button>
-                <button  onClick={()=>{
-                    
-                    if(a === 'a'){
-                        let aa=[...check]
-                        const Index = aa?.[number-1]
-                        let bb=[...allanswer]
-                     if (Index===undefined)
-                        {setAllanswer([...allanswer,answer])
-                        setAnswer('')
-                        aa[number-1]='a'
-                        setCheck(aa)
-                        console.log(number)
-                        setNumber(number=number+1)
-                        console.log(number)
-                        console.log('if index is undefined')
-                        setA('')}
-                    else{
-                        bb[number-1]=answer
-                        setAllanswer(bb)
-                        aa[number-1]='a'
-                        setCheck(aa)
-                        console.log('defined')
-                        const Index2 = aa?.[number]
-                           if(Index2===undefined){
-                               console.log("goodddd")
-                               setA('')
-                           }
-                           else{
-                               console.log('gppd2')
-                               setA(check[number])
-                           }
-                           console.log(number)
-                        setNumber(number=number+1)
-                        console.log(number)
-                    }
-                    }
-                    else if(a === 'b'){
-                        let aa=[...check]
-                        const Index = aa?.[number-1]
-                        let bb=[...allanswer]
-                        if (Index===undefined)
-                           {
-                           setAllanswer([...allanswer,answer])
-                           setAnswer('')
-                           aa[number-1]='b'
-                           setCheck(aa)
-                           setNumber(number+1)
-                           console.log('if index is undefined')
-                           setA('')}
-                       else{
-                           bb[number-1]=answer
-                           setAllanswer(bb)
-                           aa[number-1]='b'
-                           setCheck(aa)
-                           console.log('defined')
-                           const Index2 = aa?.[number]
-                           if(Index2===undefined){
-                               console.log("goodddd")
-                               setA('')
-                           }
-                           else{
-                               console.log('gppd2')
-                               setA(check[number])
-                           }
-                           setNumber(number+1)
-                       }
-                    }
-                    // else if(a === 'c'){
-                        
-                    //     let aa=[...check]
-                    //     aa[number-1]='c'
-                    //     setCheck(aa)
-                    //     setNumber(number=number+1)
-                    //     setA('')
-                    // }
-                    // else if(a === 'd'){
-                        
-                    //     let aa=[...check]
-                    //     aa[number-1]='d'
-                    //     setCheck(aa)
-                    //     setNumber(number=number+1)
-                    //     setA('')
-                    // }
-                    // console.log(allanswer)
-                    }
-                }>submit</button>
-                <button onClick={()=>{
-                     let aa=[...check]
-                        aa[number-1]='n'
-                        setCheck(aa)
-                        setNumber(number=>number+1)
-                        setA('')} }>next</button>
-                </div>
-            
-            </div>:""}
-            
-            {number ===2 ? 
-            <div>
-            
-            <h4 style={{paddingLeft:'30px'}}>2.What is your age</h4>
-            
-            <div style={{paddingLeft:'30px'}}>
-                <input type="radio"  name="name"   checked={a==='a'} value="salman" onChange={(e)=>{
-                        setAnswer(e.target.value)
-                        setA("a")}}/>
-                <label >Salman</label><br/>
 
-                <input type="radio" name="name"  checked={a==='b'}  value="anas" onChange={(e)=>{
-                    setAnswer(e.target.value)
-                    setA("b") }}/>
-                <label >anas</label><br/>
+                        <input type="radio" name="name" checked={a === 'c'} value="navaras" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("c")
+                        }} />
+                        <label >navaras</label><br />
 
-                
-                <input type="radio"  name="name"   checked={a==='c'} value="navaras" onChange={(e)=>{
-                        setAnswer(e.target.value)
-                        setA("c")}}/>
-                <label >navaras</label><br/>
+                        <input type="radio" name="name" checked={a === 'd'} value="aswin" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("d")
+                        }} />
+                        <label >aswin</label><br />
 
-                <input type="radio" name="name"  checked={a==='d'}  value="aswin" onChange={(e)=>{
-                    setAnswer(e.target.value)
-                    setA("d")}}/>
-                <label >aswin</label><br/>
-                <button  onClick={()=>{
-                    console.log(allanswer)
-                    console.log(check)
-                    console.log(number)
-                    setNumber(number-1)
-                    console.log(number)
-                    setAnswer(allanswer[number-1])
-                    if(check[number-1]==='a'){
-
-                        setA('a')
-                        
-                    } 
-                    else if(check[number-1]==='b'){
-
-                        setA('b')
-                    } 
-                    else if(check[number-1]==='c'){
-
-                        setA('c')
-                    } 
-                    else if(check[number-1]==='d'){
-
-                        setA('d')
-                    } 
-                
-                }}
-                    >Back</button>
-                <button  onClick={()=>{
-                 if(a === 'a'){
-                    let aa=[...check]
-                    const Index = aa?.[number-1]
-                    let bb=[...allanswer]
-                 if (Index===undefined)
-                    {setAllanswer([...allanswer,answer])
-                    setAnswer('')
-                    aa[number-1]='a'
-                    setCheck(aa)
-                    setNumber(number+1)
-                    console.log('if index is undefined')
-                    setA('')}
-                else{
-                        aa[number-1]='a'
-                        bb[number-1]=answer
-                        setAllanswer(bb)
-                        setCheck(aa)
-                        console.log('defined')
-                        const Index2 = aa?.[number]
-                        if(Index2===undefined){
-                            console.log("goodddd")
+                        <button  >Back</button>
+                        <button onClick={()=>store(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer)}>submit</button>
+                        <button onClick={() => {
+                            let aa = [...check]
+                            aa[number - 1] = 'n'
+                            setCheck(aa)
+                            setNumber(number = number + 1)
                             setA('')
-                        }
-                        else{
-                            console.log('gppd2')
-                            setA(check[number])
-                        }
-                        setNumber(number+1)
+                        }}>next</button>
+                    </div>
 
-                    }
-                }
-                else if(a === 'b'){
-                    let aa=[...check]
-                    const Index = aa?.[number-1]
-                    let bb=[...allanswer]
-                     if (Index===undefined)
-                        {setAllanswer([...allanswer,answer])
-                        setAnswer('')
-                        aa[number-1]='b'
-                        setCheck(aa)
-                        setNumber(number+1)
-                        console.log('if index is undefined')
-                        setA('')}
-                    else{
-                        
-                        bb[number-1]=answer
-                        setAllanswer(bb)
-                        aa[number-1]='b'
-                        setCheck(aa)
-                        console.log('defined')
-                        const Index2 = aa?.[number]
-                        if(Index2===undefined){
-                            console.log("goodddd")
+                </div> : ""}
+
+            {number === 2 ?
+                <div>
+
+                    <h4 style={{ paddingLeft: '30px' }}>2.What is your age</h4>
+
+                    <div style={{ paddingLeft: '30px' }}>
+                        <input type="radio" name="name" checked={a === 'a'} value="salman" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("a")
+                        }} />
+                        <label >Salman</label><br />
+
+                        <input type="radio" name="name" checked={a === 'b'} value="anas" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("b")
+                        }} />
+                        <label >anas</label><br />
+
+
+                        <input type="radio" name="name" checked={a === 'c'} value="navaras" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("c")
+                        }} />
+                        <label >navaras</label><br />
+
+                        <input type="radio" name="name" checked={a === 'd'} value="aswin" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("d")
+                        }} />
+                        <label >aswin</label><br />
+                        <button onClick={() =>back(setNumber,number,setAnswer,allanswer,setA,check) }>Back</button>
+                        <button onClick={()=>store(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer)} >submit</button>
+                        <button onClick={() => {
+                            let aa = [...check]
+                            aa[number - 1] = 'n'
+                            setCheck(aa)
+                            setNumber(number = number + 1)
                             setA('')
-                        }
-                        else{
-                            console.log('gppd2')
-                            setA(check[number])
-                        }
-                        setNumber(number+1)
-                    }
-                }
-                else if(a === 'c'){
-                    
-                    let aa=[...check]
-                    aa[number-1]='c'
-                    setCheck(aa)
-                    setNumber(number=>number+1)
-                    setA('')
-                }
-                else if(a === 'd'){
-                    
-                    let aa=[...check]
-                    aa[number-1]='d'
-                    setCheck(aa)
-                    setNumber(number=>number+1)
-                    setA('')
-                }
-                 console.log(allanswer)
+                        }}>next</button>
+                    </div>
 
-                 console.log(check)}} >submit</button>
-                  <button onClick={()=>{
-                     let aa=[...check]
-                        aa[number-1]='n'
-                        setCheck(aa)
-                        setNumber(number=>number+1)
-                        setA('')} }>next</button>
-                </div>
-            
-            </div>:""}
+                </div> : ""}
 
-            {number ===3 ? 
-            <div>
-            
-            <h4 style={{paddingLeft:'30px'}}>3.What is your place</h4>
-            
-            <div style={{paddingLeft:'30px'}}>
-                <input type="radio"  name="name"   checked={a==='a'} value="salman" onChange={(e)=>{
-                        setAnswer(e.target.value)
-                        setA("a")}}/>
-                <label >Salman</label><br/>
+            {number === 3 ?
+                <div>
 
-                <input type="radio" name="name"  checked={a==='b'}  value="anas" onChange={(e)=>{
-                    setAnswer(e.target.value)
-                    setA("b") }}/>
-                <label >anas</label><br/>
+                    <h4 style={{ paddingLeft: '30px' }}>3.What is your place</h4>
 
-                
-                <input type="radio"  name="name"   checked={a==='c'} value="navaras" onChange={(e)=>{
-                        setAnswer(e.target.value)
-                        setA("c")}}/>
-                <label >navaras</label><br/>
+                    <div style={{ paddingLeft: '30px' }}>
+                        <input type="radio" name="name" checked={a === 'a'} value="salman" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("a")
+                        }} />
+                        <label >Salman</label><br />
 
-                <input type="radio" name="name"  checked={a==='d'}  value="aswin" onChange={(e)=>{
-                    setAnswer(e.target.value)
-                    setA("d")}}/>
-                <label >aswin</label><br/>
-                <button  onClick={()=>{
-                    console.log(allanswer)
-                    console.log(check)
-                    
-                    setNumber(number=>number-1)
-                    setAnswer(allanswer[number-1])
-                    if(check[number-1]==='a'){
-                        console.log('iam here')
-                        setA('a')
-                        
-                    } 
-                    else if(check[number-1]==='b'){
+                        <input type="radio" name="name" checked={a === 'b'} value="anas" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("b")
+                        }} />
+                        <label >anas</label><br />
 
-                        setA('b')
-                    } 
-                    else if(check[number-1]==='c'){
 
-                        setA('c')
-                    } 
-                    else if(check[number-1]==='d'){
+                        <input type="radio" name="name" checked={a === 'c'} value="navaras" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("c")
+                        }} />
+                        <label >navaras</label><br />
 
-                        setA('d')
-                    } 
-                
-                }}
-                    >Back</button>
-                <button  onClick={()=>{
-                 if(a === 'a'){
-                        
-                    let aa=[...check]
-                    aa[number-1]='a'
-                    setCheck(aa)
-                    setNumber(number=>number+1)
-                    setA('')
-                }
-                else if(a === 'b'){
-                    
-                    let aa=[...check]
-                    aa[number-1]='b'
-                    setCheck(aa)
-                    setNumber(number=>number+1)
-                    setA('')
-                }
-                else if(a === 'c'){
-                    
-                    let aa=[...check]
-                    aa[number-1]='c'
-                    setCheck(aa)
-                    setNumber(number=>number+1)
-                    setA('')
-                }
-                else if(a === 'd'){
-                    
-                    let aa=[...check]
-                    aa[number-1]='d'
-                    setCheck(aa)
-                    setNumber(number=>number+1)
-                    setA('')
-                }
-                 console.log(allanswer)
+                        <input type="radio" name="name" checked={a === 'd'} value="aswin" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("d")
+                        }} />
+                        <label >aswin</label><br />
+                        <button onClick={() => back(setNumber,number,setAnswer,allanswer,setA,check) }>Back</button>
+                        <button onClick={() => store(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer)} >submit</button>
+                        <button onClick={() => {
+                            let aa = [...check]
+                            aa[number - 1] = 'n'
+                            setCheck(aa)
+                            setNumber(number = number + 1)
+                            setA('')
+                        }}>next</button>
+                    </div>
 
-                 console.log(check)}} >submit</button>
-                  <button onClick={()=>{
-                     let aa=[...check]
-                        aa[number-1]='n'
-                        setCheck(aa)
-                        setNumber(number=>number+1)
-                        setA('')} }>next</button>
-                </div>
-            
-            </div>:""}
-            {number ===4 ? 
-            <div>
-            
-            <h4 style={{paddingLeft:'30px'}}>4.What is your country</h4>
-            
-            <div style={{paddingLeft:'30px'}}>
-                <input type="radio"  name="name"   checked={a==='a'} value="salman" onChange={(e)=>{
-                        setAnswer(e.target.value)
-                        setA("a")}}/>
-                <label >Salman</label><br/>
+                </div> : ""}
+            {number === 4 ?
+                <div>
 
-                <input type="radio" name="name"  checked={a==='b'}  value="anas" onChange={(e)=>{
-                    setAnswer(e.target.value)
-                    setA("b") }}/>
-                <label >anas</label><br/>
+                    <h4 style={{ paddingLeft: '30px' }}>4.What is your country</h4>
 
-                
-                <input type="radio"  name="name"   checked={a==='c'} value="navaras" onChange={(e)=>{
-                        setAnswer(e.target.value)
-                        setA("c")}}/>
-                <label >navaras</label><br/>
+                    <div style={{ paddingLeft: '30px' }}>
+                        <input type="radio" name="name" checked={a === 'a'} value="salman" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("a")
+                        }} />
+                        <label >Salman</label><br />
 
-                <input type="radio" name="name"  checked={a==='d'}  value="aswin" onChange={(e)=>{
-                    setAnswer(e.target.value)
-                    setA("d")}}/>
-                <label >aswin</label><br/>
-                <button  onClick={()=>{
-                    console.log(allanswer)
-                    console.log(check)
-                    setNumber(number=>number-1)
-                    if(check[number-1]==='a'){
+                        <input type="radio" name="name" checked={a === 'b'} value="anas" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("b")
+                        }} />
+                        <label >anas</label><br />
 
-                        setA('a')
-                        
-                    } 
-                    else if(check[number-1]==='b'){
 
-                        setA('b')
-                    } 
-                    else if(check[number-1]==='c'){
+                        <input type="radio" name="name" checked={a === 'c'} value="navaras" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("c")
+                        }} />
+                        <label >navaras</label><br />
 
-                        setA('c')
-                    } 
-                    else if(check[number-1]==='d'){
+                        <input type="radio" name="name" checked={a === 'd'} value="aswin" onChange={(e) => {
+                            setAnswer(e.target.value)
+                            setA("d")
+                        }} />
+                        <label >aswin</label><br />
+                        <button onClick={() =>back(setNumber,number,setAnswer,allanswer,setA,check) }>Back</button>
+                        <button onClick={() => store(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer)} >submit</button>
 
-                        setA('d')
-                    } 
-                
-                }}
-                    >Back</button>
-                <button  onClick={()=>{
-                 if(a === 'a'){
-                        
-                    let aa=[...check]
-                    aa[number-1]='a'
-                    setCheck(aa)
-                    setNumber(number=>number+1)
-                    setA('')
-                }
-                else if(a === 'b'){
-                    
-                    let aa=[...check]
-                    aa[number-1]='b'
-                    setCheck(aa)
-                    setNumber(number=>number+1)
-                    setA('')
-                }
-                else if(a === 'c'){
-                    
-                    let aa=[...check]
-                    aa[number-1]='c'
-                    setCheck(aa)
-                    setNumber(number=>number+1)
-                    setA('')
-                }
-                else if(a === 'd'){
-                    
-                    let aa=[...check]
-                    aa[number-1]='d'
-                    setCheck(aa)
-                    setNumber(number=>number+1)
-                    setA('')
-                }
-                 console.log(allanswer)
+                        <button onClick={() => {
+                            let aa = [...check]
+                            const Index = aa?.[number - 1]
+                            if (Index === undefined) {
+                                aa[number - 1] = 'n'
+                                setCheck(aa)
+                                setNumber(number => number + 1)
+                                console.log('if index is undefined')
+                                setA('')
+                            }
+                            else {
+                                console.log('defined')
+                                setNumber(number => number + 1)
+                            }
+                        }}>next</button>
+                    </div>
 
-                 console.log(check)}} >submit</button>
-                  <button onClick={()=>{
-                     let aa=[...check]
-                     const Index = aa?.[number-1]
-                     if (Index===undefined)
-                        {aa[number-1]='n'
-                        setCheck(aa)
-                        setNumber(number=>number+1)
-                        console.log('if index is undefined')
-                        setA('')}
-                    else{
-                        console.log('defined')
-                        setNumber(number=>number+1)
-                    }} }>next</button>
-                </div>
-            
-            </div>:""}
+                </div> : ""}
 
             {/* {number ===5 ? 
             <div>
@@ -503,11 +215,171 @@ function Takequiz(){
                 </div>
             
             </div>:""}  */}
-            
+
         </div>
     )
 }
 
-export {Takequiz}
+
+const store=(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer)=>{
+    if (a === 'a') {
+        let aa = [...check]
+        const Index = aa?.[number - 1]
+        let bb = [...allanswer]
+        if (Index === undefined) {
+            setAllanswer([...allanswer, answer])
+            setAnswer('')
+            aa[number - 1] = 'a'
+            setCheck(aa)
+            // console.log(number)
+            setNumber(number=number + 1)
+            // console.log(number)
+            console.log('if index is undefined')
+            setA('')
+        }
+        else {
+            bb[number - 1] = answer
+            setAllanswer(bb)
+            aa[number - 1] = 'a'
+            setCheck(aa)
+            console.log('defined')
+            const Index2 = aa?.[number]
+            if (Index2 === undefined) {
+                console.log("goodddd")
+                setA('')
+            }
+            else {
+                console.log('gppd2')
+                setA(check[number])
+            }
+            // console.log(number)
+            setNumber(number =number + 1)
+            // console.log(number)
+        }
+    }
+    else if (a === 'b') {
+        let aa = [...check]
+        const Index = aa?.[number - 1]
+        let bb = [...allanswer]
+        if (Index === undefined) {
+            setAllanswer([...allanswer, answer])
+            setAnswer('')
+            aa[number - 1] = 'b'
+            setCheck(aa)
+            setNumber(number=number + 1)
+            console.log('if index is undefined')
+            setA('')
+        }
+        else {
+            bb[number - 1] = answer
+            setAllanswer(bb)
+            aa[number - 1] = 'b'
+            setCheck(aa)
+            console.log('defined')
+            const Index2 = aa?.[number]
+            if (Index2 === undefined) {
+                console.log("goodddd")
+                setA('')
+            }
+            else {
+                console.log('gppd2')
+                setA(check[number])
+            }
+            setNumber(number=number + 1)
+        }
+    }
+    else if (a === 'c') {
+        let aa = [...check]
+        const Index = aa?.[number - 1]
+        let bb = [...allanswer]
+        if (Index === undefined) {
+            setAllanswer([...allanswer, answer])
+            setAnswer('')
+            aa[number - 1] = 'c'
+            setCheck(aa)
+            setNumber(number=number + 1)
+            console.log('if index is undefined')
+            setA('')
+        }
+        else {
+            bb[number - 1] = answer
+            setAllanswer(bb)
+            aa[number - 1] = 'c'
+            setCheck(aa)
+            console.log('defined')
+            const Index2 = aa?.[number]
+            if (Index2 === undefined) {
+                console.log("goodddd")
+                setA('')
+            }
+            else {
+                console.log('gppd2')
+                setA(check[number])
+            }
+            setNumber(number=number + 1)
+        }
+    }
+    else if (a === 'd') {
+        let aa = [...check]
+        const Index = aa?.[number - 1]
+        let bb = [...allanswer]
+        if (Index === undefined) {
+            setAllanswer([...allanswer, answer])
+            setAnswer('')
+            aa[number - 1] = 'd'
+            setCheck(aa)
+            setNumber(number=number + 1)
+            console.log('if index is undefined')
+            setA('')
+        }
+        else {
+            bb[number - 1] = answer
+            setAllanswer(bb)
+            aa[number - 1] = 'd'
+            setCheck(aa)
+            console.log('defined')
+            const Index2 = aa?.[number]
+            if (Index2 === undefined) {
+                console.log("goodddd")
+                setA('')
+            }
+            else {
+                console.log('gppd2')
+                setA(check[number])
+            }
+            setNumber(number=number + 1)
+        }
+    }
+}
+
+const back=(setNumber,number,setAnswer,allanswer,setA,check)=>{
+    console.log(allanswer)
+    console.log(check)
+    // console.log(number)
+    setNumber(number=number - 1)
+    // console.log(number)
+    setAnswer(allanswer[number - 1])
+    if (check[number - 1] === 'a') {
+
+        setA('a')
+
+    }
+    else if (check[number - 1] === 'b') {
+
+        setA('b')
+    }
+    else if (check[number - 1] === 'c') {
+
+        setA('c')
+    }
+    else if (check[number - 1] === 'd') {
+
+        setA('d')
+    }
+
+
+}
+
+export { Takequiz }
 
 
