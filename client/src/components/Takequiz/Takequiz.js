@@ -1,24 +1,31 @@
 
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext ,useEffect} from 'react'
 import { UNSAFE_NavigationContext } from 'react-router-dom';
 import { UserContext } from '../../App'
 function Takequiz() {
     // const [answer,setAnswer]=useState('')
     // const [check,setCheck]=useState([])
     // const [a,setA]=useState('')
+    const [w,setW]=useState(['1.What is your name','2.What is your age','3.What is your place','4.What is your counrty'])
 
     // const [allanswer,setAllanswer]=useState([])
     // var [number,setNumber]=useState(1)
     var { number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer } = useContext(UserContext);
     // console.log(number)
-
+    var s=w[number-1]
+    useEffect(() =>{
+        console.log('good')
+        s=w[number-1]
+    },[])
+ 
     return (
         <div>
             <h2 style={{ textAlign: 'center' }}>QUESTIONS</h2><br />
-            {number === 1 ?
+            
+                {number  ? 
                 <div>
 
-                    <h4 style={{ paddingLeft: '30px' }}>1.What is your name</h4>
+                    <h4 style={{ paddingLeft: '30px' }}>{s}</h4>
 
                     <div style={{ paddingLeft: '30px' }}>
                         <input type="radio" name="name" checked={a === 'a'} value="salman" onChange={(e) => {
@@ -46,7 +53,7 @@ function Takequiz() {
                         }} />
                         <label >aswin</label><br />
 
-                        <button  >Back</button>
+                        <button onClick={() =>back(setNumber,number,setAnswer,allanswer,setA,check)} >Back</button>
                         <button onClick={()=>{if(a!=='n')  store(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer) } }>submit</button>
                         <button onClick={() => next(check,number,allanswer,answer,setAnswer,setCheck,setNumber,setA,setAllanswer)}>next</button>
                         <button onClick={()=>{
@@ -62,9 +69,9 @@ function Takequiz() {
 
                     </div>
 
-                </div> : ""}
+                </div> :""}
 
-            {number === 2 ?
+            {/* {number === 2 ?
                 <div>
 
                     <h4 style={{ paddingLeft: '30px' }}>2.What is your age</h4>
@@ -204,7 +211,7 @@ function Takequiz() {
 
                     </div>
 
-                </div> : ""}
+                </div> : ""} */}
 
             {/* {number ===5 ? 
             <div>
@@ -398,6 +405,7 @@ const store=(number, setNumber, allanswer, setAllanswer, a, setA, check, setChec
 }
 
 const back=(setNumber,number,setAnswer,allanswer,setA,check)=>{
+    if (number!==1){
     console.log(allanswer)
     console.log(check)
     // console.log(number)
@@ -424,7 +432,7 @@ const back=(setNumber,number,setAnswer,allanswer,setA,check)=>{
     else{
         setA('n')
     }
-
+}
 
 }
 
