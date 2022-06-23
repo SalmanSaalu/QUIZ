@@ -1,4 +1,5 @@
 const Message =require('./models/Product');
+const Questions =require('./models/Question');
 const express = require("express");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -31,6 +32,20 @@ app.post('/stored', (req, res) => {
   const doc = new Message({ username: req.body.username,email:req.body.email,password:req.body.password})
   doc.save();
   })
+
+app.post('/question', (req, res) => {
+    // console.log('work')
+    console.log(req.body.number);
+    const doc = new Questions({ number: req.body.number,question:req.body.question,option1:req.body.option1,option2:req.body.option2,option3:req.body.option3,option4:req.body.option4})
+    console.log('working')
+    doc.save();
+    })
+
+app.get('/getquestion', async(req, res) => {
+  const a = await Questions.find({})
+
+  res.json(a);
+})
 
 // db.collection('demo').insertOne(req.body, (err, data) => {
 //   if(err) return console.log(err);

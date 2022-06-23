@@ -1,57 +1,95 @@
-
 import React, { useState, useContext ,useEffect} from 'react'
-import { UNSAFE_NavigationContext } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { UserContext } from '../../App'
+
+
 function Takequiz() {
     // const [answer,setAnswer]=useState('')
     // const [check,setCheck]=useState([])
     // const [a,setA]=useState('')
-    const [w,setW]=useState(['1.What is your name','2.What is your age','3.What is your place','4.What is your counrty'])
-
+    // const [w,setW]=useState(['1.What is your name','2.What is your age','3.What is your place','4.What is your counrty'])
+    const navigate=useNavigate()
     // const [allanswer,setAllanswer]=useState([])
     // var [number,setNumber]=useState(1)
-    var { number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer } = useContext(UserContext);
+    var { number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer,qst,setQst } = useContext(UserContext);
+    
     // console.log(number)
-    var s=w[number-1]
+    // const [qst,setQst]=useState()
+    
     useEffect(() =>{
-        console.log('good')
-        s=w[number-1]
+       
+        fetch("/getquestion")
+        .then((res) => res.json())
+        .then((data)=>{
+          
+          setQst(data)})
+           
+        
     },[])
  
     return (
         <div>
             <h2 style={{ textAlign: 'center' }}>QUESTIONS</h2><br />
-            
-                {number  ? 
+            <button type="submit" className="signupbtn" onClick={(e)=>{
+                            e.preventDefault()
+                            console.log("1")
+                            let databody = {
+                                "number": 5,
+                                "question": ' what is ur job?',
+                                "option1":'student',
+                                "option2":'employee',
+                                "option3":'trainee',
+                                "option4":'other',
+                                
+                            }
+                            console.log("2")
+                            return fetch('/question', {
+                                method: 'POST',
+                                body: JSON.stringify(databody),
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                
+                            })
+                            .then(res => {res.json()})
+                            .then(navigate('/'))
+
+                        }
+                        
+                    }>add question</button>
+                
                 <div>
 
-                    <h4 style={{ paddingLeft: '30px' }}>{s}</h4>
+                   {qst ? qst[number-1] ? 
+                    <div>
+                    <h4 style={{ paddingLeft: '30px' }} onClick={()=>console.log(qst[0].question)}>{number}{qst[number-1].question}</h4> 
 
                     <div style={{ paddingLeft: '30px' }}>
-                        <input type="radio" name="name" checked={a === 'a'} value="salman" onChange={(e) => {
+                        <input type="radio" name="name" checked={a === 'a'} value={qst[number-1].option1} onChange={(e) => {
+                            
                             setAnswer(e.target.value)
                             setA("a")
                         }} />
-                        <label >Salman</label><br />
+                        <label >{qst[number-1].option1}</label><br />
 
-                        <input type="radio" name="name" checked={a === 'b'} value="anas" onChange={(e) => {
+                        <input type="radio" name="name" checked={a === 'b'} value={qst[number-1].option2} onChange={(e) => {
                             setAnswer(e.target.value)
                             setA("b")
                         }} />
-                        <label >anas</label><br />
+                        <label >{qst[number-1].option2}</label><br />
 
 
-                        <input type="radio" name="name" checked={a === 'c'} value="navaras" onChange={(e) => {
+                        <input type="radio" name="name" checked={a === 'c'} value={qst[number-1].option3} onChange={(e) => {
                             setAnswer(e.target.value)
                             setA("c")
                         }} />
-                        <label >navaras</label><br />
+                        <label >{qst[number-1].option3}</label><br />
 
-                        <input type="radio" name="name" checked={a === 'd'} value="aswin" onChange={(e) => {
+                        <input type="radio" name="name" checked={a === 'd'} value={qst[number-1].option4} onChange={(e) => {
                             setAnswer(e.target.value)
                             setA("d")
                         }} />
-                        <label >aswin</label><br />
+                        <label >{qst[number-1].option4}</label><br />
 
                         <button onClick={() =>back(setNumber,number,setAnswer,allanswer,setA,check)} >Back</button>
                         <button onClick={()=>{if(a!=='n')  store(number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer) } }>submit</button>
@@ -68,13 +106,16 @@ function Takequiz() {
                             }}>clear response</button>
 
                     </div>
+                    </div>: 
+                    <div>
+                    <button onClick={() =>back(setNumber,number,setAnswer,allanswer,setA,check)}>back</button>
+                    <button onClick={(allAnswer)=>{console.log(allAnswer)}}>finish</button>
+                    </div>:''}
 
-                </div> :""}
+                </div> 
 
            
-                 <button onClick={(allAnswer)=>{
-                 console.log(allAnswer)
-                  }}>press</button>
+                 
         </div>
                                        
     )
@@ -212,6 +253,7 @@ const store=(number, setNumber, allanswer, setAllanswer, a, setA, check, setChec
         }
     }
     else{
+        if (a!==''){
         let aa = [...check]
         const Index = aa?.[number - 1]
         let bb = [...allanswer]
@@ -240,7 +282,7 @@ const store=(number, setNumber, allanswer, setAllanswer, a, setA, check, setChec
                 setA(check[number])
             }
             setNumber(number=number + 1)
-        }
+        }}
     }
 }
 

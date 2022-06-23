@@ -4,7 +4,7 @@ import React,{ useEffect, useState,useContext } from 'react'
 import { UserContext } from '../../App'
 function Home(){
 
-const {setUsername,username} = useContext(UserContext);
+const {setUsername,username,qst,setQst} = useContext(UserContext);
 const navigate=useNavigate()
 const setDELETE = (username) => {
     localStorage.setItem('username', (''))
@@ -23,7 +23,7 @@ const setDELETE = (username) => {
 
         <ul>
             <li>Home</li>
-            <li>News</li>
+            <Link to='/addquestion'><li>Add question</li></Link>
             <Link to='/takequiz'><li>Take quiz</li></Link>
             {username !== '' && username !=='email or password is not match' ? 
             <div>
@@ -31,7 +31,7 @@ const setDELETE = (username) => {
             <li style={{float:'right'}} onClick={setDELETE}>logout</li>
             </div>
              :  <div> <Link to='/signin'><li style={{float:'right'}}>Signin</li></Link>
-                                                                                <Link to='/signup'><li style={{float:'right'}}>Signup</li></Link> </div>}
+            <Link to='/signup'><li style={{float:'right'}}>Signup</li></Link> </div>}
             <li style={{float:'right'}}>About</li>
 
         </ul>
