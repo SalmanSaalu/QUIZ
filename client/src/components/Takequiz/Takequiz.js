@@ -422,7 +422,7 @@ const back=(setNumber,number,setAnswer,allanswer,setA,check)=>{
         setA('d')
     }
     else{
-        setA('')
+        setA('n')
     }
 
 
@@ -434,7 +434,7 @@ const next=(check,number,allanswer,answer,setAnswer,setCheck,setNumber,setA,setA
     const Index = aa?.[number - 1]
     let bb = [...allanswer]
     if (Index === undefined) {
-        setAllanswer([...allanswer, answer])
+        setAllanswer([...allanswer,''])
         setAnswer('')
         aa[number - 1] = 'n'
         setCheck(aa)
