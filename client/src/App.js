@@ -15,6 +15,10 @@ function App() {
   const [containoption2,setContainoption2]= useState([])
   const [containoption3,setContainoption3]= useState([])
   const [containoption4,setContainoption4]= useState([])
+  
+  //containing and adding answer
+  const [demoanswer,setDemoanswer]=useState("")
+  const [containanswer,setContainanswer]=useState([])
 
   //context for addquestion
   const [add,setAdd]=useState(1)
@@ -48,7 +52,7 @@ function App() {
       <Router>
         <UserContext.Provider value={{ setUsername, username, setAllanswer, allanswer, setAnswer, answer, check, setCheck, a, setA, number, setNumber,qst,setQst,add,setAdd,
         addingquestion,setAddingquestion,option1,setOption1,option2,setOption2,option3,setOption3,option4,setOption4,containquestion, setContainquestion,containoption1,setContainoption1,
-        containoption2,setContainoption2,containoption3,setContainoption3,containoption4,setContainoption4}}>
+        containoption2,setContainoption2,containoption3,setContainoption3,containoption4,setContainoption4,demoanswer,setDemoanswer,containanswer,setContainanswer}}>
           <Routes>
             <Route index element={<Home />} />
             <Route path='/signin' element={<Login />} />
