@@ -228,7 +228,7 @@ function Addquestion() {
                             if(containquestion.length===containanswer.length&&containoption1.length===containoption2.length&&containoption3.length===containoption4.length){
                                 addqst.map((obj)=>{
                                     // console.log(obj)
-                                
+                                if(containquestion[obj-1]!==undefined){
                                 let databody = {
                                         "number": obj,
                                         "question": containquestion[obj-1],
@@ -251,7 +251,7 @@ function Addquestion() {
                                         },
                                         
                                     })
-                                }) 
+                             } }) 
                             
                             // .then(res => {res.json()})
                             setAddingquestion('')
