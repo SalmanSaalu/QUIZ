@@ -16,47 +16,21 @@ function Takequiz() {
     // console.log(number)
     // const [qst,setQst]=useState()
     
-    useEffect(() =>{
+    // useEffect(() =>{
        
-        fetch("/getquestion")
-        .then((res) => res.json())
-        .then((data)=>{
+    //     fetch("/getquestion")
+    //     .then((res) => res.json())
+    //     .then((data)=>{
           
-          setQst(data)})
+    //       setQst(data)})
            
         
-    },[])
+    // },[])
  
     return (
         <div>
             <h2 style={{ textAlign: 'center' }}>QUESTIONS</h2><br />
-            <button type="submit" className="signupbtn" onClick={(e)=>{
-                            e.preventDefault()
-                            console.log("1")
-                            let databody = {
-                                "number": 5,
-                                "question": ' what is ur job?',
-                                "option1":'student',
-                                "option2":'employee',
-                                "option3":'trainee',
-                                "option4":'other',
-                                
-                            }
-                            console.log("2")
-                            return fetch('/question', {
-                                method: 'POST',
-                                body: JSON.stringify(databody),
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                
-                            })
-                            .then(res => {res.json()})
-                            .then(navigate('/'))
-
-                        }
-                        
-                    }>add question</button>
+           
                 
                 <div>
 

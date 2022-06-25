@@ -61,7 +61,7 @@ const setUSER = (username) => {
                             })
                             .then(res => res.json())
                             .then((data)=>{
-
+                                    console.log(data)
                                 if (data.username!=='email or password is not match'){
                                     setUSER(data.username)
                                     

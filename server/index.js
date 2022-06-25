@@ -36,15 +36,30 @@ app.post('/stored', (req, res) => {
 app.post('/question', (req, res) => {
     // console.log('work')
     console.log(req.body.number);
-    const doc = new Questions({ number: req.body.number,question:req.body.question,option1:req.body.option1,option2:req.body.option2,option3:req.body.option3,option4:req.body.option4})
+    const doc = new Questions({ number: req.body.number,question:req.body.question,option1:req.body.option1,option2:req.body.option2,option3:req.body.option3,option4:req.body.option4,answer:req.body.option4,
+    questioncode:req.body.questioncode,username:req.body.username})
     console.log('working')
     doc.save();
     })
 
-app.get('/getquestion', async(req, res) => {
-  const a = await Questions.find({})
-
-  res.json(a);
+app.post('/getquestion',async(req, res) => {
+  
+ await Questions.exists({questioncode:req.body.questioncode},async function (err, doc) {
+    if (err){
+        console.log(err)
+    }else{
+              console.log(doc)
+              if (doc===null) 
+              {console.log('error')
+              a="question code not match"
+              res.json(a)}
+              else{
+                console.log('qqq')
+                const a = await Questions.find({questioncode:req.body.questioncode})
+                res.json(a);
+              }
+          }
+    })
 })
 
 // db.collection('demo').insertOne(req.body, (err, data) => {
@@ -55,10 +70,12 @@ app.get("/base", async(req, res) => {
   const a = await Message.find({})
 
   res.json(a);
+
+
 });
 
 app.post("/based", (req, res) => {
-;
+
   Message.exists({email:req.body.email,password:req.body.password},async function (err, doc) {
     if (err){
         console.log(err)

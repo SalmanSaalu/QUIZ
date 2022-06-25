@@ -2,31 +2,38 @@ import './Home.css'
 import {Link,useNavigate} from 'react-router-dom'
 import React,{ useEffect, useState,useContext } from 'react'
 import { UserContext } from '../../App'
+import {Answer} from '../Answer/answer'
 function Home(){
 
-const {setUsername,username,qst,setQst} = useContext(UserContext);
+const {setUsername,username,qst,setQst,codecheck,setCodecheck} = useContext(UserContext);
 const navigate=useNavigate()
 const setDELETE = (username) => {
     localStorage.setItem('username', (''))
     setUsername('');
     navigate('/')}
-//  useEffect(() => {
-//     fetch("/base",{ method: 'GET'})
-//       .then((res) =>res.json())
-//       .then((data) => {setUsername(data[0].username) 
-//        });
 
-//   }, []);
-  
+var a=''
+const [isOpen, setIsOpen] = useState(false);
+const togglePopup = () => {
+  console.log('work')
+  setIsOpen(!isOpen);
+}
+ 
+
     return(
-        <div>
+        <div id='main_container'>
 
         <ul>
             <li>Home</li>
-            <Link to='/addquestion'><li>Add question</li></Link>
-            <Link to='/takequiz'><li>Take quiz</li></Link>
+
             {username !== '' && username !=='email or password is not match' ? 
             <div>
+            <Link to='/addquestion'><li>Add question</li></Link>
+            <li className='click-text' onClick={
+              ()=>{setIsOpen(!isOpen);}
+              
+            }>Take quiz</li>
+            <Link to='/addedqst'><li>Profile</li></Link>
             <li style={{float:'right'}}>{username}</li> 
             <li style={{float:'right'}} onClick={setDELETE}>logout</li>
             </div>
@@ -37,7 +44,10 @@ const setDELETE = (username) => {
         </ul>
         
         <div >
-            <TextAnimation/>
+         
+          {isOpen ?  <Answer  handleClose={togglePopup}/>: <TextAnimation/> }
+             
+            {/* <TextAnimation/> */}
         </div>
         </div>
     )

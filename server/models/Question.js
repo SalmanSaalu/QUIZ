@@ -9,7 +9,10 @@ const questionSchema = new Schema({
     option1: String,
     option2:String,
     option3: String,
-    option4:String
+    option4:String,
+    answer:String,
+    username:String,
+    questioncode:String
 })
 
 const Questions=mongoose.model('questions', questionSchema);

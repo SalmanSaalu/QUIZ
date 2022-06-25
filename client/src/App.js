@@ -3,12 +3,16 @@ import { Login } from './components/Login/Login'
 import { Home } from './components/Home/Home'
 import {Addquestion } from './components/Addquestion/Addquestion'
 import { Takequiz } from './components/Takequiz/Takequiz'
+import {Addqst} from './components/Added questions/Addedqst'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import './App.css';
 import React, { useEffect, useState } from 'react'
 export const UserContext = React.createContext()
 
 function App() {
+
+  //checking question code
+  const [codecheck, setCodecheck] = useState("");
   //context for contain questions and options
   const [containquestion, setContainquestion] = useState([])
   const [containoption1,setContainoption1]= useState([])
@@ -36,7 +40,7 @@ function App() {
 
   const [qst,setQst]=useState()
   //context for logins
-  const [data, setData] = React.useState(null);
+ 
   const [username, setUsername] = React.useState('');
   useEffect(() => {
     setUsername(localStorage.getItem('username'))
@@ -50,7 +54,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <UserContext.Provider value={{ setUsername, username, setAllanswer, allanswer, setAnswer, answer, check, setCheck, a, setA, number, setNumber,qst,setQst,add,setAdd,
+        <UserContext.Provider value={{codecheck,setCodecheck, setUsername, username, setAllanswer, allanswer, setAnswer, answer, check, setCheck, a, setA, number, setNumber,qst,setQst,add,setAdd,
         addingquestion,setAddingquestion,option1,setOption1,option2,setOption2,option3,setOption3,option4,setOption4,containquestion, setContainquestion,containoption1,setContainoption1,
         containoption2,setContainoption2,containoption3,setContainoption3,containoption4,setContainoption4,demoanswer,setDemoanswer,containanswer,setContainanswer}}>
           <Routes>
@@ -59,6 +63,7 @@ function App() {
             <Route path='/signup' element={<Signup />} />
             <Route path='/takequiz' element={<Takequiz />} />
             <Route path='/addquestion' element={<Addquestion />} />
+            <Route path='/addedqst' element={<Addqst />} />
           </Routes>
         </UserContext.Provider>
       </Router>

@@ -1,21 +1,29 @@
 import React, { useState, useContext, useEffect } from 'react'
 import '../Home/Home.css'
+import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../App'
 import { Link } from 'react-router-dom'
 var rough=''
 function Addquestion() {
     const [addqst, setAddqst] = useState([1])
     const [number,setNumber]=useState(1)
-    const {containquestion, setContainquestion, add, setAdd, addingquestion,setAddingquestion,option1,setOption1,option2,setOption2,option3,setOption3,option4,setOption4,
+    const {username,containquestion, setContainquestion, add, setAdd, addingquestion,setAddingquestion,option1,setOption1,option2,setOption2,option3,setOption3,option4,setOption4,
         containoption1,setContainoption1,containoption2,setContainoption2,containoption3,setContainoption3,containoption4,setContainoption4,demoanswer,setDemoanswer,containanswer,setContainanswer } = useContext(UserContext);
     // console.log(addqst)
+    const navigate=useNavigate()
+ 
+    // console.log(typeof(stp))
+    
 
+    const aaa=(Math.floor(Math.random() *100000))
+    const rndom="CY"+aaa
+     
     return (
 
         <div>
 
             <ul>
-                <li>your quiz code number is C2087</li>
+                <li>your quiz code number is {rndom}</li>
 
             </ul>
             
@@ -214,7 +222,63 @@ function Addquestion() {
           
             
             
-            <button type='submit' >finished</button>
+                    <button type="submit" className="signupbtn" onClick={(e)=>{
+                            e.preventDefault()
+                            // console.log("1")
+                            if(containquestion.length===containanswer.length&&containoption1.length===containoption2.length&&containoption3.length===containoption4.length){
+                                addqst.map((obj)=>{
+                                    // console.log(obj)
+                                
+                                let databody = {
+                                        "number": obj,
+                                        "question": containquestion[obj-1],
+                                        "option1":containoption1[obj-1],
+                                        "option2":containoption2[obj-1],
+                                        "option3":containoption3[obj-1],
+                                        "option4":containoption4[obj-1],
+                                        "answer":containanswer[obj-1],
+                                        "questioncode":rndom,
+                                        "username":username
+                                        
+                                    }
+                                    console.log(databody) 
+                                    console.log("2")
+                                    return fetch('/question', {
+                                        method: 'POST',
+                                        body: JSON.stringify(databody),
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        
+                                    })
+                                }) 
+                            
+                            // .then(res => {res.json()})
+                            setAddingquestion('')
+                            setOption1('')
+                            setOption2('')
+                            setOption3('')
+                            setOption4('')
+                            setDemoanswer('')
+                            setContainquestion([])
+                            setContainoption1([])
+                            setContainoption2([])
+                            setContainoption3([])
+                            setContainoption4([])
+                            setContainanswer([])
+                            setAddqst([1])
+                            setAdd(1)
+                            setNumber(1)
+                            navigate('/')
+
+                        }
+                        else{console.log('values are not equal')
+                        console.log(containanswer.length,containoption1.length,containoption2.length,containoption3.length,containoption4.length,containquestion.length)
+                        // console.log(1===1===1)
+                    console.log(typeof(containanswer.length))}}
+                        
+                        
+                    }>finish</button>
                      
         </div>
                 
