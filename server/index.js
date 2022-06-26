@@ -3,7 +3,7 @@ const Questions = require('./models/Question');
 const express = require("express");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
+const Answer=require('./models/Answer');
 
 
 const PORT = process.env.PORT || 3001;
@@ -25,6 +25,92 @@ app.use(bodyParser.json());
 //     })
 
 //   }
+//validateanswer
+app.post("/validateanswer", (req, res) => {
+
+  Answer.exists({ username: req.body.username,questioncode:req.body.questioncode}, async function (err, doc) {
+    if (err) {
+      console.log(err)
+    } else {
+      // console.log(doc)
+      if (doc === null) {
+        console.log('error')
+        a='loading answers'
+        res.json(a)
+      }
+      else {
+        // console.log('qqq')
+        const a = await Answer.find({ username: req.body.username,questioncode:req.body.questioncode })
+        // console.log(a);
+        res.json(a);
+      }
+    }
+  })
+})
+
+
+
+
+
+//allexistanswers
+app.post("/allexistanswers", (req, res) => {
+
+  Answer.exists({ username: req.body.username}, async function (err, doc) {
+    if (err) {
+      console.log(err)
+    } else {
+      // console.log(doc)
+      if (doc === null) {
+        console.log('error')
+        a='no questions answered'
+        res.json(a)
+      }
+      else {
+        // console.log('qqq')
+        const a = await Answer.distinct("questioncode",{ username: req.body.username })
+        // console.log(a);
+        res.json(a);
+      }
+    }
+  })
+})
+
+
+
+
+//existuseranswer
+app.post("/existuseranswer", (req, res) => {
+
+ Answer.exists({ username: req.body.username, questioncode: req.body.questioncode }, async function (err, doc) {
+    if (err) {
+      console.log(err)
+    } else {
+      // console.log(doc._id)
+      if (doc === null) {
+        console.log('error')
+        a = "not exist" 
+        res.json(a)
+      }
+      else {
+        console.log(doc)
+        var a = "already attempted"
+        console.log("Result :", a) // false
+        res.json(a)
+      }
+
+    }
+  });
+})
+
+//adding answers to answers
+  app.post('/savingallanswers', (req, res) => {
+    // console.log('work')
+    console.log(req.body);
+    const doc = new Answer({ username: req.body.username, questioncode: req.body.questioncode, answers: req.body.answers })
+    doc.save();
+  })
+
+
 //all added unique questionscode for that user
 app.post('/allquestions', async (req, res) => {
  
@@ -96,16 +182,16 @@ app.post('/getquestion', async (req, res) => {
     if (err) {
       console.log(err)
     } else {
-      console.log(doc)
+      // console.log(doc)
       if (doc === null) {
-        console.log('error')
+        // console.log('error')
 
         res.json({ a: "question code not match" })
       }
       else {
-        console.log('qqq')
+        // console.log('qqq')
         const a = await Questions.find({ questioncode: req.body.questioncode })
-        console.log(a);
+        // console.log(a);
         res.json(a);
       }
     }

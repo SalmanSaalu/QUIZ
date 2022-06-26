@@ -11,7 +11,7 @@ function Takequiz() {
     const navigate=useNavigate()
     // const [allanswer,setAllanswer]=useState([])
     // var [number,setNumber]=useState(1)
-    var { number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer,qst,setQst } = useContext(UserContext);
+    var {username, number, setNumber, allanswer, setAllanswer, a, setA, check, setCheck, answer, setAnswer,qst,setQst } = useContext(UserContext);
     
     // console.log(number)
     // const [qst,setQst]=useState()
@@ -83,7 +83,38 @@ function Takequiz() {
                     </div>: 
                     <div>
                     <button onClick={() =>back(setNumber,number,setAnswer,allanswer,setA,check)}>back</button>
-                    <button onClick={(allAnswer)=>{console.log(allAnswer)}}>finish</button>
+                    <button onClick={(allAnswer)=>{
+                        console.log(allanswer)
+                       
+                        let databody = {
+
+                            "questioncode": qst[0].questioncode,
+                            "username":username,
+                            "answers":allanswer
+
+                        }
+                        setNumber(1)
+                        setAllanswer([])
+                        setA('')
+                        setCheck([])
+                        setAnswer('')
+                        setQst()
+                        
+                        return fetch('/savingallanswers', {
+                            method: 'POST',
+                            body: JSON.stringify(databody),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+
+                        })
+                            .then(res =>  res.json())
+                            .then(
+                                navigate('/')
+                            )
+                           
+
+                        }}>finish</button>
                     </div>:''}
 
                 </div> 

@@ -6,8 +6,12 @@ import { UserContext } from '../../App'
 function Addqst(){
     const {username}=useContext(UserContext)
     const [stp,setStp]=useState('')
+    const [noanswer,setNoanswer]=useState('')
     const [addedqst,setAddedqst]=useState([])
+    const [addedans,setAddedans]=useState([])
     const [fetchallqst,setFetchallqst]=useState([])
+    const [validate,setValidate]=useState([])
+    const [vld,setVld]=useState('')
 
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
@@ -32,7 +36,8 @@ function Addqst(){
         <div>
             <ul>
                 <li onClick={()=>{
-                    
+                        setAddedans([])
+                  
                      let databody = {
 
                         "username": username
@@ -53,7 +58,7 @@ function Addqst(){
                             if(data==='question not added'){
                                 // console.log(data)
                                 setStp('questions not added')
-                                console.log(stp)
+                                // console.log(stp)
                             }
                             else{
                                 // console.log(data)
@@ -66,21 +71,17 @@ function Addqst(){
                   <div id="myDropdown" className="dropdown-content">
                   {addedqst ? 
                       addedqst.map((obj,i)=> <a key={i} onClick={()=>{
-                        
-                        let databody = {
+                       
+                        setValidate([])
 
-                            "questioncode": obj
-
-                        }
+                        let databody = { "questioncode": obj }
 
                         return fetch('/getallquestion', {
                             method: 'POST',
                             body: JSON.stringify(databody),
                             headers: {
                                 'Content-Type': 'application/json'
-                            },
-
-                        })
+                            },})
                             .then(res => {
                                 //    console.log(res)
                                 return res.json()
@@ -88,21 +89,96 @@ function Addqst(){
                             .then((data) => {
                                 
                                 setFetchallqst(data)
-                                })
+                                })}
 
-                      }}>{obj} </a>):""}
+                      }>{obj} </a>):""}
+
+                    {addedans?addedans.map((obj,i)=> <a key={i} onClick={()=>{
+                                                let databody = { "questioncode": obj,"username":username }
+
+                                                        return fetch('/validateanswer', {
+                                                            method: 'POST',
+                                                            body: JSON.stringify(databody),
+                                                            headers: {
+                                                                'Content-Type': 'application/json'
+                                                            },})
+                    .then(res => {
+                        //    console.log(res)
+                        return res.json()
+                    })
+                    .then((data) => {
+                        // console.log(data)
+                        setValidate(data)
+                            let databody = { "questioncode": obj }
+
+                            return fetch('/getallquestion', {
+                                method: 'POST',
+                                body: JSON.stringify(databody),
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },})
+                                .then(res => {
+                                    //    console.log(res)
+                                    return res.json()
+                                })
+                                .then((data) => {
+                                    
+                                    setFetchallqst(data)
+                                                })
+                        })
+
+
+                    }}>{obj}</a>):''}
+
+
+
+
                       
                     </div>
-                <li>Answers</li>
+                    
+                <li onClick={()=>{
+                    setAddedqst([])
+                   
+                    //  setVld('answers')
+                    let databody = {
+
+                       "username": username
+
+                   }
+
+                   return fetch('/allexistanswers', {
+                       method: 'POST',
+                       body: JSON.stringify(databody),
+                       headers: {
+                           'Content-Type': 'application/json'
+                       }, })
+                       .then(res =>  res.json()
+                       )
+                       .then((data) => {
+                           if(data==='no questions answered'){
+                               // console.log(data)
+                               setNoanswer('no questions answered')
+                               console.log(noanswer)
+                           }
+                           else{
+                               // console.log(data)
+                           setAddedans(data)
+                           // console.log(addedqst)
+                           myFunction()
+                       }
+                       })
+               }} className="dropbtn">Answers</li>
             </ul>
-            <div style={{textAlign:"center"}}>
-                {stp==='' ? 
+
+
+            <div >
+                {
                 
                 fetchallqst.map((obj,i)=>{
                     return (
-                <div key={i} style={{textAlign:"center"}}>
+                <div key={i} style={{paddingLeft:'15%'}}>
                     
-                    <h4>{obj.question}</h4>
+                    <h4>{i+1}.{obj.question}</h4>
                     <label>option 1</label> :{obj.option1}<br/>
                     
                     <label>option 2</label> :{obj.option2}<br/>
@@ -110,9 +186,13 @@ function Addqst(){
                     
                     <label>option 4</label> :{obj.option4}<br/>
                     <label>answer</label> :{obj.answer}<br/>
+                   
+                    {validate?.[0] ? 
+                    <div>
+                    <label>your option</label> {validate[0].answers[i]} </div>: ""}
                 </div>)
-                }) :
-            stp}
+                }) 
+           }
                 
                 
             </div>

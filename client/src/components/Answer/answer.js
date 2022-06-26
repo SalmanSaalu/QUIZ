@@ -6,7 +6,7 @@ function Answer(props) {
     const [qstncodevalue, setQstncodevalue] = useState('')
     const navigate = useNavigate()
     const [paswd, setPaswd] = useState('')
-    const { setQst } = useContext(UserContext)
+    const { setQst,qst,username } = useContext(UserContext)
     return (
         <div className='popup-box' >
             <div className="box" >
@@ -48,8 +48,30 @@ function Answer(props) {
                                         console.log('working')
                                         setQst(data)
                                         
-                                        setQstncodevalue('')
-                                        navigate('/takequiz')
+                                        let databody={
+                                            'questioncode':qstncodevalue,
+                                            'username':username
+                                        }
+                                        return fetch('/existuseranswer',{
+                                            method: 'POST',
+                                            body: JSON.stringify(databody),
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            }, })
+                                            .then(res => res.json())
+                                            .then((data)=>{
+                                                if(data==='already attempted'){
+                                                    setPaswd(data)
+                                                }
+                                                else{
+                                                    setQstncodevalue('')
+                                                    navigate('/takequiz')
+                                                }
+                                            })
+
+
+
+
                                     }
                                 })
                         } else { console.log('not working') }

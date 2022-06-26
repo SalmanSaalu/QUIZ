@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../App'
 import { Link } from 'react-router-dom'
 var rough=''
+
 function Addquestion() {
     const [addqst, setAddqst] = useState([1])
     const [number,setNumber]=useState(1)
@@ -11,12 +12,18 @@ function Addquestion() {
         containoption1,setContainoption1,containoption2,setContainoption2,containoption3,setContainoption3,containoption4,setContainoption4,demoanswer,setDemoanswer,containanswer,setContainanswer } = useContext(UserContext);
     // console.log(addqst)
     const navigate=useNavigate()
- 
+    const [rndom,setRndom]=useState('')
+    useEffect(()=>{
+        
+   
+        const aaa=(Math.floor(Math.random() *100000))
+         setRndom("CY"+aaa)
+        
+        },[])
     // console.log(typeof(stp))
     
 
-    const aaa=(Math.floor(Math.random() *100000))
-    const rndom="CY"+aaa
+
      
     return (
 

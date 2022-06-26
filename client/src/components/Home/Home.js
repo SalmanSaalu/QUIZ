@@ -14,6 +14,7 @@ const setDELETE = (username) => {
 
 var a=''
 const [isOpen, setIsOpen] = useState(false);
+console.log(username)
 const togglePopup = () => {
   console.log('work')
   setIsOpen(!isOpen);
@@ -26,7 +27,7 @@ const togglePopup = () => {
         <ul>
             <li>Home</li>
 
-            {username !== '' && username !=='email or password is not match' ? 
+            {username !== '' && username !=='email or password is not match' && username!==null ? 
             <div>
             <Link to='/addquestion'><li>Add question</li></Link>
             <li className='click-text' onClick={
