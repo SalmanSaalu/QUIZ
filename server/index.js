@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 //     })
 
 //   }
+//all added unique questionscode for that user
 app.post('/allquestions', async (req, res) => {
  
   await Questions.exists({ username: req.body.username}, async function (err, doc) {
@@ -34,13 +35,36 @@ app.post('/allquestions', async (req, res) => {
       // console.log(doc)
       if (doc === null) {
         console.log('error')
-
-        res.json({ a: "question not added" })
+        a='question not added'
+        res.json(a)
       }
       else {
         // console.log('qqq')
-        const a = await Questions.find({ username: req.body.username })
-        console.log(a);
+        const a = await Questions.distinct("questioncode",{ username: req.body.username })
+        // console.log(a);
+        res.json(a);
+      }
+    }
+  })
+})
+
+//to fetch all corresponding question code questions
+app.post('/getallquestion', async (req, res) => {
+ 
+  await Questions.exists({ questioncode: req.body.questioncode}, async function (err, doc) {
+    if (err) {
+      console.log(err)
+    } else {
+      // console.log(doc)
+      if (doc === null) {
+        console.log('error')
+        a="wait for response"
+        res.json(a)
+      }
+      else {
+        // console.log('qqq')
+        const a = await Questions.find({ questioncode: req.body.questioncode })
+        // console.log(a);
         res.json(a);
       }
     }

@@ -197,11 +197,11 @@ function Addquestion() {
                   
 
             
-                    {addqst.map((obj) => containquestion?.[obj-1]? 
+                    {addqst.map((obj,i) => containquestion?.[obj-1]? 
                         // console.log('woil')
                         // containquestion?.[obj-1]?  
-                          
-                    <div style={{float:'left', paddingRight: '20px' }}>
+                      
+                    <div style={{float:'left', paddingRight: '20px' }} key={i}>
                     <p><label >{obj}question</label></p>
                     <textarea  value={containquestion[obj-1]}  name="w3review" rows="4" cols="50" required readOnly ></textarea><br />
                         <label >option 1 :</label>
