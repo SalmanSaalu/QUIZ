@@ -21,3 +21,7 @@
     display: block;
   }
   .show {display: block;}
+
+  .dropbtn{
+    cursor: pointer;
+  }

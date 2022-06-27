@@ -40,7 +40,7 @@ function Addquestion() {
                     <div style={{ paddingLeft: '20px' }}>
                         
                         <p><label >{number}question</label></p>
-                        <textarea onChange={(e)=>ValueQuestion(setAddingquestion,e,number)} value={addingquestion}  name="w3review" rows="4" cols="50" required ></textarea><br />
+                        <textarea onChange={(e)=>ValueQuestion(setAddingquestion,e,number)} value={addingquestion}  name="w3review" rows="auto" cols="30" required ></textarea><br />
                         <label >option 1 :</label>
                         {demoanswer === option1 && option1!==""? <input onChange={(e)=>ValueOption1(setOption1,e,number)} value={option1}  type="text" required readOnly/>:
                         <input onChange={(e)=>ValueOption1(setOption1,e,number)} value={option1}  type="text" required/>}

@@ -12,7 +12,7 @@ export const UserContext = React.createContext()
 function App() {
 
   //checking question code
-  const [codecheck, setCodecheck] = useState("");
+  const [codecheck, setCodecheck] = useState(0);
   //context for contain questions and options
   const [containquestion, setContainquestion] = useState([])
   const [containoption1,setContainoption1]= useState([])
