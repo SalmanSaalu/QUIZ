@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Answer=require('./models/Answer');
 
-
 const PORT = process.env.PORT || 3001;
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/quiz');
@@ -25,6 +24,45 @@ app.use(bodyParser.json());
 //     })
 
 //   }
+//getting all answers/listinguserans
+app.get("/listinguserans", async (req, res) => {
+  // console.log('working')
+  const a = await Answer.find({})
+
+  res.json(a);
+
+
+});
+
+
+
+
+//getting all question code which attended bu users after submitting its answer (only based on aperson)
+app.post("/listinguserqst", (req, res) => {
+
+  Questions.exists({ username: req.body.username}, async function (err, doc) {
+    if (err) {
+      console.log(err)
+    } else {
+      // console.log(doc)
+      if (doc === null) {
+        console.log('error')
+        a='no answer'
+        res.json(a)
+      }
+      else {
+        // console.log('qqq')
+        const a = await Questions.distinct("questioncode",{ username: req.body.username })
+        // console.log(a);
+        res.json(a);
+      }
+    }
+  })
+})
+
+
+
+
 //validateanswer
 app.post("/validateanswer", (req, res) => {
 

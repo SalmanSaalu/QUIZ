@@ -45,15 +45,6 @@
         transform: rotate(3600deg);
     }
 }
-/* .button{
-  -moz-transform:rotate(360deg);
-  -webkit-transform:rotate(360deg);
-  transform:rotate(360deg); */
-/* } */
-/* .newgood{
-  width: 100px;
-  transition: width 4.5s;
-} */
 
 
 .value{
@@ -63,7 +54,7 @@
  text-align:center;
  border:'1px solid';
  height: 40px;
- width: 80px;
+ width: 100px;
 }
 
 .transform{
@@ -72,8 +63,28 @@
 
 .transform-active{
   background-color: #45cee0;
-  height: 40px;width: 80px;
+  height: 40px;width: 100px;
 }
+
+
+.dropdown-listanswer {
+ 
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-listanswer a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.show {display: block;}
 
 
 
