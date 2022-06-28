@@ -25,3 +25,59 @@
   .dropbtn{
     cursor: pointer;
   }
+
+.icon {
+    transform: rotate(360deg);
+    transition: 1s transform;
+}
+
+.icon.selected {
+    animation: spin 1s;
+    transform: rotate(3600deg);
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    
+    100% {
+        transform: rotate(3600deg);
+    }
+}
+/* .button{
+  -moz-transform:rotate(360deg);
+  -webkit-transform:rotate(360deg);
+  transform:rotate(360deg); */
+/* } */
+/* .newgood{
+  width: 100px;
+  transition: width 4.5s;
+} */
+
+
+.value{
+ float: right;
+ border-radius: 100px;
+ /* margin-top:-6%; */
+ text-align:center;
+ border:'1px solid';
+ height: 40px;
+ width: 80px;
+}
+
+.transform{
+  transition: all 2s ease;
+}
+
+.transform-active{
+  background-color: #45cee0;
+  height: 40px;width: 80px;
+}
+
+
+
+
+
+
+

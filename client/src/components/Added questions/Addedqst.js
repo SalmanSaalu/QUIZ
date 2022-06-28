@@ -14,10 +14,11 @@ function Addqst(){
     const [validate,setValidate]=useState([])
     const [vld,setVld]=useState("")
     const [ btnans, setBtnans]=useState('')
-    
+    const [btncheck,setBtncheck]=useState(0)
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
       }
+
 
 
     window.onclick = function(event) {
@@ -33,7 +34,14 @@ function Addqst(){
         }
       }
 
+      function boom(){
 
+        var buttonElement = document.getElementById('button');
+         {
+            buttonElement.classList.toggle('selected');
+        };
+    }
+      
 
 
     return(
@@ -99,6 +107,7 @@ function Addqst(){
 
                     {addedans?addedans.map((obj,i)=> <a key={i} onClick={()=>{
                                                
+
                                                 let databody = { "questioncode": obj,"username":username }
 
                                                         return fetch('/validateanswer', {
@@ -113,6 +122,7 @@ function Addqst(){
                     })
                     .then((data) => {
                         // console.log(data)
+                        setBtncheck(0)
                         setBtnans('')
                         setValidate(data)
                      
@@ -131,6 +141,8 @@ function Addqst(){
                                 .then((data) => {
                                     
                                     setFetchallqst(data)
+                                    if (btncheck===1)
+                                    document.getElementById('good').classList.toggle("transform-active")
                                                
                             })
                         })
@@ -142,7 +154,7 @@ function Addqst(){
 
                 <li onClick={()=>{
                     setAddedqst([])
-                   
+                    
                     //  setVld('answers')
                     let databody = {
 
@@ -174,30 +186,51 @@ function Addqst(){
                }} className="dropbtn">Answers</li>
             </ul>
 
+            
             {validate?.[0] ?     
             <div>
-                <button style={{marginLeft:'80%'}} onClick={()=>{
-                    var a=0
-                     {fetchallqst.map((obj,i)=>{
-                        console.log('outer')
-                        if(obj.answer===validate[0].answers[i]){
-                            // setBtnans([...btnans,1])
-                            a=a+1
-                            
-                        }
-                    // console.log(a)
-                    setBtnans(a)
+                
+                <button className='icon' id="button" style={{float:'right',height: '40px',width: '39px', borderRadius: '100px'}} onClick={()=>{
+                   
+                    // boom()
+                    if(btncheck===0){
+                        setBtncheck(1)
+                        console.log(btncheck)
+                    }
+                    else if(btncheck===1){
+                        setBtncheck(0)
+                        console.log(btncheck)
+                    }
+                    
+                    boom()
+                    document.getElementById('good').classList.toggle("transform-active")
+                    // $("#good").click(function(){
+                    //     // $(".transform").toggleClass("transform-active");
+                    //  });
+                    
+                        var a=0
+                        {fetchallqst.map((obj,i)=>{
+                            console.log('outer')
+                            if(obj.answer===validate[0].answers[i]){
+                                // setBtnans([...btnans,1])
+                                a=a+1
+                                
+                            }
+                        // console.log(a)
+                        setBtnans(a)
 
-                     })}
+                        })}
+                    
                     // {obj.answer===validate[0].answers[i] ?  :""}
                         }
-                }>my mark</button>
-               
+                }>M</button>
+                <div id='good' className='value transform'><p style={{marginTop:'6.8px'}}>{btnans!=="" ? btncheck===1? btnans :"":""}</p></div>
+                 
                
             </div>
             :""}
 
-            {btnans!=="" ? btnans :""}
+            
 
 
 
