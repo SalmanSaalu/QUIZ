@@ -87,6 +87,56 @@
 .show {display: block;}
 
 
+.value2 {
+
+  float: center;
+  text-align:center;
+  border:'1px solid';
+  height: 0px;
+  width: 0px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* .value2:hover{
+   width: 400px
+} */
+
+
+
+.show2
+{
+  /* transition: all 1s ease-in ; */
+  
+  background-color: #45cee0;
+  height: 100px;width: 200px;
+ 
+}
+
+
+
+/* .value{
+  float: right;
+  border-radius: 100px;
+  /* margin-top:-6%; */
+  /* text-align:center;
+  border:'1px solid';
+  height: 40px;
+  width: 100px;
+ }
+  */
+ /* .transform{
+   transition: all 2s ease;
+ }
+ 
+ .transform-active{
+   background-color: #45cee0;
+   height: 40px;width: 100px;
+ }
+  */
+
+
+
 
 
 

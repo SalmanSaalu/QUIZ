@@ -21,6 +21,10 @@ function Addqst() {
     const [listingquestion, setListingquestion] = useState([])
     const [listingans, setListingans] = useState([])
     const [onlyans, setOnlyans] = useState([])
+
+    //for storing marks for users who attended particular quiz in amrklist/answerlist
+    const [getqstmark,setGetqstmark]=useState([])
+    const [getansmark,setGetansmark]=useState([])
     // console.log(onlyans)
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
@@ -36,6 +40,7 @@ function Addqst() {
     window.onclick = function (event) {
         if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
+            setListuser('')
             var i;
             for (i = 0; i < dropdowns.length; i++) {
                 var openDropdown = dropdowns[i];
@@ -44,6 +49,19 @@ function Addqst() {
                 }
             }
         }
+         if(!event.target.matches('.dropbtn2')){
+            {
+                var dropdowns = document.getElementsByClassName("dropdown-listanswer");
+                setListuser('')
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+         }
     }
 
     function boom() {
@@ -99,6 +117,9 @@ function Addqst() {
 
                             setValidate([])
                             setBtnans('')
+                            setOnlyans([])
+                            setGetansmark([])
+                            setGetqstmark([])
                             let databody = { "questioncode": obj }
 
                             return fetch('/getallquestion', {
@@ -142,7 +163,9 @@ function Addqst() {
                                 setBtncheck(0)
                                 setBtnans('')
                                 setValidate(data)
-
+                                setOnlyans([])
+                                setGetansmark([])
+                                setGetqstmark([])
                                 let databody = { "questioncode": obj }
 
                                 return fetch('/getallquestion', {
@@ -210,7 +233,7 @@ function Addqst() {
                     answerlist()
                     setFetchallqst([])
                     setValidate([])
-
+                   
                     let databody = { "username": username }
 
                     return fetch('/listinguserqst', {
@@ -264,13 +287,13 @@ function Addqst() {
                                         setOnlyans([...d])
                                         setOnlyans((onlyans)=>[... new Set(onlyans)])
                                         
-
+                                     
 
                                     })
                             }
                         })
 
-                }}>Answer List</li>
+                }} className='dropbtn2'>Answer List</li>
             </ul>
 
 
@@ -385,16 +408,86 @@ function Addqst() {
             </div>
 
             <div className='dropdown-listanswer' id='listanswer'>
-                {listuser === 'user' ?
+                {
 
                 onlyans.map((obj,id)=>{
-                   return <a key={id} >{obj}</a>
-                })
+                   return <a key={id} onClick={()=>{
+                        // setListuser('')
+                        let databody = { "questioncode": obj }
+
+                        return fetch('/objectcode', {
+                            method: 'POST',
+                            body: JSON.stringify(databody),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                        })
+                            .then(res => {
+                                //    console.log(res)
+                                return res.json()
+                            })
+                            .then((data) => {setGetqstmark(data)
+
+
+                            return fetch('/getallquestion', {
+                                method: 'POST',
+                                body: JSON.stringify(databody),
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                            })
+                            .then(res => {
+                                //    console.log(res)
+                                return res.json()
+                            })
+                            .then((data) => {setGetansmark(data)
+                            // console.log(getansmark)
+                        })
+
+                        })
+                    }
+                   }>{obj}</a>
                 
-                : " "}
+                })
+                }
+                
                
             </div>
 
+
+
+            <div>
+                {
+                   getqstmark?
+                   
+                   <div>
+                    {
+                    
+                    getqstmark.map((obj,i)=>{
+                        const a=t(obj)
+                        return (
+                        <div>
+                        <p key={i}>{obj.username}:{a}</p>
+                        <button onClick={()=>{
+                        document.getElementById('target-1').classList.toggle('show2')
+                        }}>Details</button>
+                        </div>)
+                        })
+                        
+                        
+                    }
+
+                    </div>:""
+                }
+            </div>
+
+            {/* for displaying mark details */}
+            <div>
+            
+                <div id="target-1" className='value2 transform' >The Titanic was a big ship.</div>
+
+          
+            </div>
 
 
 
@@ -403,6 +496,21 @@ function Addqst() {
         </div>
 
     )
+
+    function t(obj){
+        var t=0
+        obj.answers.forEach((obj2,i)=>{
+
+        if (getansmark[i]!==undefined){
+          if(obj2===getansmark[i].answer ){t=t+1}
+
+             }
+              
+         })
+         return t
+    }
+
+
 }
 
 export { Addqst }

@@ -24,6 +24,34 @@ app.use(bodyParser.json());
 //     })
 
 //   }
+//getting all users for that obj questioncode
+app.post("/objectcode", (req, res) => {
+
+  Answer.exists({questioncode:req.body.questioncode}, async function (err, doc) {
+    if (err) {
+      console.log(err)
+    } else {
+      // console.log(doc)
+      if (doc === null) {
+        console.log('error')
+        a='loading answers'
+        res.json(a)
+      }
+      else {
+        // console.log('qqq')
+        const a = await Answer.find({ questioncode:req.body.questioncode })
+        // console.log(a);
+        res.json(a);
+      }
+    }
+  })
+})
+
+
+
+
+
+
 //getting all answers/listinguserans
 app.get("/listinguserans", async (req, res) => {
   // console.log('working')
