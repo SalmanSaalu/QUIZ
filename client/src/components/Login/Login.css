@@ -1,0 +1,16 @@
+.modal{
+    background-image: linear-gradient(to bottom right,  #ff0000, #e452e2);
+    border-radius: 0% 0px 0% 0px;
+    color: white;
+    font-family: cursive;
+    text-align: center;
+    width: 50%;
+    margin-left: 23%;
+    height: 400px;
+}
+
+input,button{
+    border-radius: 12px;
+    border: 0px;
+    font-family: math;
+}

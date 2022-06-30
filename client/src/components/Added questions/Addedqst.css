@@ -90,13 +90,26 @@
 .value2 {
 
   float: center;
-  text-align:center;
+  text-align:left;
   border:'1px solid';
-  height: 0px;
+  max-height:0px;
+  margin-left: 23%;
   width: 0px;
   overflow: hidden;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
+
+/* .value3{
+    float: center;
+    text-align:left;
+    border:'1px solid';
+    max-height:0px;
+    margin-left: 23%;
+    width: 0px;
+    overflow: hidden;
+    /* white-space: nowrap; */
+  
+
 
 /* .value2:hover{
    width: 400px
@@ -108,11 +121,24 @@
 {
   /* transition: all 1s ease-in ; */
   
-  background-color: #45cee0;
-  height: 100px;width: 200px;
- 
+  /* background-image: url('https://media.istockphoto.com/photos/and-a-question-and-answer-shot-form-on-wooden-block-picture-id1337475990?b=1&k=20&m=1337475990&s=170667a&w=0&h=mkuwkXiXwCjfmbzOYt76tT0KWj06wJ2DaLXllzGIa1M='); */
+  max-height:600px;
+  margin-left: 23%;
+  width: 71%;
+  text-align: left;
+  padding-left: 2%;
+  /* word-break: break-all; */
+  overflow-wrap: break-word;
 }
 
+.mklist{
+  background-image: url('https://media.istockphoto.com/photos/and-a-concept-yellow-question-mark-glowing-amid-black-question-marks-picture-id1305169776?b=1&k=20&m=1305169776&s=170667a&w=0&h=mpYdh2MzGN_rqxoRNlO5KWGCCq3ZktzSfp-wA0nD9no=');
+  color: white;
+  font-family: none;
+  padding-left: 14px;
+  border-radius: 20px;
+  box-shadow: 1px 0px 10px 7px;
+}
 
 
 /* .value{

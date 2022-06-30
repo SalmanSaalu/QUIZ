@@ -1,7 +1,7 @@
 import react,{useState,useContext, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from '../../App'
-
+import './Login.css'
 function Login(){
 
 const [email,setEmail]=useState('')
@@ -25,7 +25,7 @@ const setUSER = (username) => {
                     
 
                     <label style={{paddingRight:'86px'}}><b>Email</b></label>
-                    <input type="email" placeholder="Enter Email" value={email} name="email" required onChange={(e)=>setEmail(e.target.value)}/><br/>
+                    <input type="email" placeholder="Enter Email"  value={email} name="email" required onChange={(e)=>setEmail(e.target.value)}/><br/>
 
                     <label style={{paddingRight:'56px'}}><b>Password</b></label>
                     <input type="password" placeholder="Enter Password" value={password} name="psw" required onChange={(e)=>setPassword(e.target.value)}/><br/>
@@ -34,8 +34,7 @@ const setUSER = (username) => {
                     <input type="checkbox"  name="remember" style={{marginBottom:'15px',color:'black'}}/> Remember me
                     </label><br/>
                    
-                    {email}
-                    {password}
+  
                     
                     <p>By creating an account you agree to our Terms & Privacy.</p>
 
@@ -77,7 +76,7 @@ const setUSER = (username) => {
                         }
                         
                         
-                    }>Sign In</button>
+                    } style={{cursor:'pointer'}}>Sign In</button>
                     </div>
                     </form>
                 </div>

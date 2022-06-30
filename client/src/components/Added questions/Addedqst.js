@@ -25,6 +25,8 @@ function Addqst() {
     //for storing marks for users who attended particular quiz in amrklist/answerlist
     const [getqstmark,setGetqstmark]=useState([])
     const [getansmark,setGetansmark]=useState([])
+    const [marklist,setMartlist]=useState([])
+    console.log(getansmark)
     // console.log(onlyans)
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
@@ -79,7 +81,7 @@ function Addqst() {
             <ul>
                 <li onClick={() => {
                     setAddedans([])
-                    setListuser('')
+                   
                     let databody = {
 
                         "username": username
@@ -114,12 +116,15 @@ function Addqst() {
                 <div id="myDropdown" className="dropdown-content">
                     {addedqst ?
                         addedqst.map((obj, i) => <a key={i} onClick={() => {
-
+                            document.getElementById("target-1").className='value2 transform'
+                            
+                            setMartlist([])
                             setValidate([])
                             setBtnans('')
                             setOnlyans([])
                             setGetansmark([])
                             setGetqstmark([])
+                            
                             let databody = { "questioncode": obj }
 
                             return fetch('/getallquestion', {
@@ -144,7 +149,7 @@ function Addqst() {
 
                     {addedans ? addedans.map((obj, i) => <a key={i} onClick={() => {
 
-
+                        document.getElementById("target-1").className='value2 transform'
                         let databody = { "questioncode": obj, "username": username }
 
                         return fetch('/validateanswer', {
@@ -166,6 +171,7 @@ function Addqst() {
                                 setOnlyans([])
                                 setGetansmark([])
                                 setGetqstmark([])
+                                setMartlist([])
                                 let databody = { "questioncode": obj }
 
                                 return fetch('/getallquestion', {
@@ -193,7 +199,6 @@ function Addqst() {
 
                 <li onClick={() => {
                     setAddedqst([])
-                    setListuser('')
                     //  setVld('answers')
                     let databody = {
 
@@ -229,7 +234,7 @@ function Addqst() {
 
                 <li style={{ cursor: "pointer" }} onClick={() => {
                     setOnlyans([])
-                    setListuser('user')
+                    // setListuser('user')
                     answerlist()
                     setFetchallqst([])
                     setValidate([])
@@ -412,7 +417,8 @@ function Addqst() {
 
                 onlyans.map((obj,id)=>{
                    return <a key={id} onClick={()=>{
-                        // setListuser('')
+                         document.getElementById("target-1").className='value2 transform'
+                        setMartlist([])
                         let databody = { "questioncode": obj }
 
                         return fetch('/objectcode', {
@@ -427,7 +433,7 @@ function Addqst() {
                                 return res.json()
                             })
                             .then((data) => {setGetqstmark(data)
-
+                                // console.log(getqstmark)
 
                             return fetch('/getallquestion', {
                                 method: 'POST',
@@ -456,38 +462,88 @@ function Addqst() {
 
 
 
-            <div>
+            <div >
                 {
                    getqstmark?
                    
-                   <div>
+                   <div style={{width:'20%',float:'left'}}>
                     {
                     
                     getqstmark.map((obj,i)=>{
                         const a=t(obj)
                         return (
-                        <div>
-                        <p key={i}>{obj.username}:{a}</p>
+                        <div style={{paddingLeft:'10px',boxShadow: 'rgb(241 157 1) 0px 0px 7px 4px',
+                        borderRadius: '34px 0px 17px 0px',fontFamily:'cursive'}}>
+                        <p key={i} style={{overflowWrap: 'break-word'}}>{obj.username}:{a}</p>
                         <button onClick={()=>{
+                        // setListuser('user')
+                        setMartlist(obj.answers)
                         document.getElementById('target-1').classList.toggle('show2')
-                        }}>Details</button>
+                        }} style={{fontFamily: 'cursive',border: '0px', backgroundColor:' beige',borderRadius:'20px'}}>Details</button>
                         </div>)
                         })
                         
                         
                     }
-
+                      
                     </div>:""
                 }
+                
+                <div id="target-1" className='value2 transform' style={{width:'73%',float:'center',marginTop: '3%'}}>
+                       
+                { marklist.length!==0 ||marklist!==undefined?
+                <div>
+                        {getansmark.map((obj3,i)=>{
+                          
+                        return (
+
+                            <div key={i} className='mklist'>
+                                <p style={{color:'white'}}>question {i+1}:{obj3.question}<br/>
+                                option 1:{obj3.option1}<br/>
+                                option 2:{obj3.option2}<br/>
+                                option 3:{obj3.option3}<br/>
+                                option 4:{obj3.option4}<br/>
+                                answer:{obj3.answer}<br/>
+                                your option:{marklist[i]}</p>
+                                {obj3.answer===marklist[i]?<p style={{color:'white'}}>True</p>:marklist[i]===''?<p style={{color:'white'}}>not answered</p>:<p style={{color:'white'}}>false</p>}
+                            </div>
+
+                        )
+                        
+                        })}
+                       
+
+                    </div> 
+                        :""}
+
+
+                </div>
+                 
+              
             </div>
 
             {/* for displaying mark details */}
-            <div>
+            {/* <div>
             
-                <div id="target-1" className='value2 transform' >The Titanic was a big ship.</div>
+                <div id="target-1" className='value2 transform' >
+                   {getansmark.map((obj3,i)=>{
+                   return (
+
+                    <div key={i}>
+                        <p>question {i+1}:{obj3.question}</p>
+                        <p>option 1:{obj3.option1}</p>
+                        <p>option 2:{obj3.option2}</p>
+                        <p>option 3:{obj3.option3}</p>
+                        <p>option 4:{obj3.option4}</p>
+                    </div>
+
+                   )
+                   
+                   })}
+                </div>
 
           
-            </div>
+            </div> */}
 
 
 

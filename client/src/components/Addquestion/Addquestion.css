@@ -1,0 +1,13 @@
+input{
+    border: 1px solid;
+}
+
+textarea{
+    width:95%
+}
+
+.finish{
+    width: 100px;
+    border: 1px solid red;
+    box-shadow: 2px 2px 2px 2px
+}

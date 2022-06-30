@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import '../Home/Home.css'
+import './Addquestion.css'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../App'
 import { Link } from 'react-router-dom'
@@ -65,7 +66,7 @@ function Addquestion() {
                             {option3!==''  ? <option value={option3} >option3</option>:""}
                             {option4!==''  ? <option value={option4} >option4</option>:""}
                             
-                        </select>
+                        </select><br/><br/>
                         {/* <input onChange={(e)=>ValueOption5(setDemoanswer,e,number)} value={demoanswer}  type="text" required/><br /> */}
                         <button onClick={(e)=>{
                             if (number!==1){
@@ -77,7 +78,7 @@ function Addquestion() {
                              setOption2('')
                              setOption3('')
                              setOption4('')
-                             setDemoanswer('')}}}>back</button>
+                             setDemoanswer('')}}} className='finish'>back</button>
                         <button onClick={(e)=>{
                             
                             if((addingquestion && option1 && option2 && option3 && option4 && demoanswer !=='')){
@@ -180,7 +181,7 @@ function Addquestion() {
                                 // console.log('not working')
                                 
                             }
-                        }}>submit</button>
+                        }}  className='finish'>submit</button>
                         <button onClick={() => {
                             if(containquestion[number-1] && containoption1[number-1] && containoption2[number-1] && containoption3[number-1] && containoption4[number-1] && containanswer[number-1]!== undefined)
                             {console.log('working')
@@ -198,7 +199,7 @@ function Addquestion() {
                             setOption4('')
                             setDemoanswer('')}
 
-                        }}>add another question</button>
+                        }}  className='finish' style={{width:'150px'}}>add another question</button>
 
                     </div>
                   
@@ -228,8 +229,8 @@ function Addquestion() {
              
           
             
-            
-                    <button type="submit" className="signupbtn" onClick={(e)=>{
+                    <div>
+                    <button type="submit" className="finish" onClick={(e)=>{
                             e.preventDefault()
                             // console.log("1")
                             if(containquestion.length===containanswer.length&&containoption1.length===containoption2.length&&containoption3.length===containoption4.length){
@@ -285,7 +286,7 @@ function Addquestion() {
                     console.log(typeof(containanswer.length))}}
                         
                         
-                    }>finish</button>
+                    } style={{marginLeft:'20px'}}>finish</button></div>
                      
         </div>
                 
